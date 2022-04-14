@@ -52,7 +52,7 @@ void CTree::TreeDtor_ (struct item* node)
     if (node->right)
         TreeDtor_ (node->right);
 
-    node->data = DESTROYED;
+    //node->data = DESTROYED;
     delete[] node;
 }
 
@@ -64,14 +64,14 @@ struct item* CTree::addItm (struct item* prefItm, ElemType data, int mode)
 {
     if (CheckEmpty_ (prefItm) == EMPTY)         //check tree on empty
     {
-        treeRoot_->data = data;
+        treeRoot_->data.STR = data;
          
         return treeRoot_;
     }
                 
     struct item* newItm = new item;
     
-    newItm->data = data;
+    newItm->data.STR = data;
  
     switch (mode)
     {
@@ -118,7 +118,7 @@ int CTree::CheckEmpty_ (struct item* prefItm)
 
 int CTree::CompareAndAddItm_ (struct item* prefItm, struct item* newItm)
 {
-     switch (Compare (newItm->data, prefItm->data))
+    switch (Compare (newItm->data.STR, prefItm->data.STR))
     {
         case LEFT:
         {
@@ -195,7 +195,7 @@ struct item* CTree::findItm (ElemType data)
     while (item)
     {  
         //printf ("data: \"%s\"\n obj : \"%s\"\n\n", data, item->data);
-        switch (Compare (data, item->data))
+        switch (Compare (data, item->data.STR))
         { 
             case LEFT:
                 item = item->left;
@@ -233,7 +233,7 @@ void CTree::addBuffer (char* buffer)
 
 int CTree::TreeOk_ ()
 {
-    printf ("%s\n", treeRoot_->data);
+    printf ("%s\n", treeRoot_->data.STR);
 
     return NOMISTAKE;
 }
@@ -263,7 +263,7 @@ int CtorElemsForDot (struct item* node)
         return NOMISTAKE;
     }  
 
-    DotElemCtor (node, node->data, node->left, node->right);
+    DotElemCtor (node, node->data.STR, node->left, node->right);
 
     if (node->left)
         CtorElemsForDot (node->left);

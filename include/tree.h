@@ -19,6 +19,7 @@ const int           STARTNUM    =          7;
 
 const int           MAXANSWSIZE =         50;
 
+// для добавления в конкретно правую или левую ветку
 enum addMode
 {
     ADDLEFT     =    123,
@@ -26,6 +27,7 @@ enum addMode
     STANDART
 };
 
+// для определения результата сравнения 
 enum comp
 {
     LEFT        =   3523,
@@ -34,16 +36,43 @@ enum comp
     NOCOMP
 };
 
+// тип узла 
+enum typeNode
+{
+    DBL         =    512,
+    CHR         =    123,
+    INT         =    213,
+    OPERATOR    =   2139
+};
+
+enum operate
+{
+    def     =   '.',
+    mul     =   '*',
+    sub     =   '+'
+};
+
 //-------------------------------------------------------------------------
 //--------------------------TYPE_OF_THE_TREE-------------------------------
 //-------------------------------------------------------------------------
 //#define ELEM_FMT "%s"
-#define STR
+
 //typedef const char* ElemType;
-                                                            
+
+//данные узла (юнион)
+struct structData
+{
+    int             INT     =       0;
+    double          DOUBLE  =       0;
+    char            CHR     =       0;
+    const char*     STR     = nullptr;
+    operate         OP      =     def;
+};
+
 struct item
 {
-	ElemType		data	    =	       0;
+    typeNode        type        =        INT;
+	structData    	data	    =	      {};
 
     struct item*    parent      =    nullptr;
 
