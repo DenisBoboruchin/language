@@ -9,23 +9,27 @@ int GetG (const char* s)
     p = 0;
 
     int val = GetE ();
-    assert (str[p] == '$');
+    
+    if (str[p] != '$')
+    {
+        PrintError ();
+        assert (!"SyntaxError, expected '$'");
+    }
 
     return val;
 }
 
-int GetE ()
+static int GetE ()
 {
     int val = 0;
-    val = GetN ();
+    val = GetT ();
 
-    int op = str[p];
-    while (op == '+' || op == '-')
+    while (str[p] == '+' || str[p] == '-')
     {
-        op = str[p];
+        int op = str[p];
         p++;
 
-        int val2 = GetN ();
+        int val2 = GetT ();
 
         if (op == '+')
             val += val2;
@@ -36,9 +40,53 @@ int GetE ()
     return val;
 }
 
-int GetN ()
+static int GetT ()
 {
     int val = 0;
+    val = GetP ();
+
+    while (str[p] == '*' || str[p] == '/')
+    {
+        int op = str[p];
+        p++;
+
+        int val2 = GetP ();
+
+        if (op == '*')
+            val *= val2;
+        else
+            val /= val2;   //check null
+    }
+
+    return val;
+}
+
+static int GetP ()
+{
+    if (str[p] == '(')
+    {
+        p++;
+        int val = GetE ();
+
+        if (str[p] != ')')
+        {
+            PrintError ();
+            assert (!"SyntaxError, expected ')'");
+        }
+
+        p++;
+
+        return val;
+    }
+
+    else
+        return GetN ();
+}
+
+static int GetN ()
+{
+    int val = 0;
+    int tempP = p;
 
     while ('0' <= str[p] && str[p] <= '9')
     {
@@ -46,5 +94,21 @@ int GetN ()
         p++;
     }
 
+    if (tempP == p)
+    {
+        PrintError ();
+
+        assert (!"SyntaxError");
+    }
+    
     return val;
+}
+
+static int PrintError ()
+{
+    printf ("SyntaxError!!!\n");
+    printf ("%s\n", str);
+    printf ("%*s\n", p, "^");
+
+    return NOMISTAKE;
 }

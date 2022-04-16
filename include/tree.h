@@ -6,10 +6,11 @@
 #include <assert.h>
 
 #include "graphviz.h"
+#include "../include/parser.h"
 
 const int           DESTROYSZ   =     -12323;
 
-const int           NOMISTAKE   =          0;
+extern const int    NOMISTAKE;
 const int           MISTAKE     =          1;
                                 
 const int           EMPTY       =       9234;

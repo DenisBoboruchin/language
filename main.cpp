@@ -14,10 +14,9 @@ int main ()
     t1.addItm (t1.findItm ("+"), "3", ADDLEFT);
     t1.addItm (t1.findItm ("+"), "x", ADDRIGHT);
     
-    printf ("adssda\n");
     t1.graphDump ();
 
-    printf ("%d\n", GetG ("345+22$"));
+    printf ("%d\n", GetG ("20*30+(10+5*2)*2$"));
 
    // CTree t1 = CtorTreeFromFile ("dump/startEquation.txt");
 
