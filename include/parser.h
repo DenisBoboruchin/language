@@ -12,12 +12,8 @@ struct sentence
     int         p   =       0;  
 };
 
-int GetG (const char* s);
-static int GetE ();
-static int GetT ();
-static int GetP ();
-static int GetN ();
+int GetG (const char* str);
 
-static int PrintError ();
+#define parsSymb sent->str[sent->p]
 
 #endif

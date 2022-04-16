@@ -1,35 +1,40 @@
 #include "../include/parser.h"
 
-const char* str = nullptr;
-int         p   =       0;
+static int GetE (sentence* sent);
+static int GetT (sentence* sent);
+static int GetP (sentence* sent);
+static int GetN (sentence* sent);
 
-int GetG (const char* s)
+static int PrintError (sentence* sent);
+
+int GetG (const char* str)
 {
-    str = s;
-    p = 0;
+    sentence sent = {};
+    sent.str = str;
+    sent.p = 0;
 
-    int val = GetE ();
+    int val = GetE (&sent);
     
-    if (str[p] != '$')
+    if (sent.str[sent.p] != '$')
     {
-        PrintError ();
+        PrintError (&sent);
         assert (!"SyntaxError, expected '$'");
     }
 
     return val;
 }
 
-static int GetE ()
+static int GetE (sentence* sent)
 {
     int val = 0;
-    val = GetT ();
+    val = GetT (sent);
 
-    while (str[p] == '+' || str[p] == '-')
+    while (parsSymb == '+' || parsSymb == '-')
     {
-        int op = str[p];
-        p++;
+        int op = parsSymb;
+        sent->p++;
 
-        int val2 = GetT ();
+        int val2 = GetT (sent);
 
         if (op == '+')
             val += val2;
@@ -40,17 +45,17 @@ static int GetE ()
     return val;
 }
 
-static int GetT ()
+static int GetT (sentence* sent)
 {
     int val = 0;
-    val = GetP ();
+    val = GetP (sent);
 
-    while (str[p] == '*' || str[p] == '/')
+    while (parsSymb == '*' || parsSymb == '/')
     {
-        int op = str[p];
-        p++;
+        int op = parsSymb;
+        sent->p++;
 
-        int val2 = GetP ();
+        int val2 = GetP (sent);
 
         if (op == '*')
             val *= val2;
@@ -61,42 +66,42 @@ static int GetT ()
     return val;
 }
 
-static int GetP ()
+static int GetP (sentence* sent)
 {
-    if (str[p] == '(')
+    if (parsSymb == '(')
     {
-        p++;
-        int val = GetE ();
+        sent->p++;
+        int val = GetE (sent);
 
-        if (str[p] != ')')
+        if (parsSymb != ')')
         {
-            PrintError ();
+            PrintError (sent);
             assert (!"SyntaxError, expected ')'");
         }
 
-        p++;
+        sent->p++;
 
         return val;
     }
 
     else
-        return GetN ();
+        return GetN (sent);
 }
 
-static int GetN ()
+static int GetN (sentence* sent)
 {
     int val = 0;
-    int tempP = p;
+    int tempP = sent->p;
 
-    while ('0' <= str[p] && str[p] <= '9')
+    while ('0' <= parsSymb && parsSymb <= '9')
     {
-        val = val * 10 + (str[p] - '0');
-        p++;
+        val = val * 10 + (parsSymb - '0');
+        sent->p++;
     }
 
-    if (tempP == p)
+    if (tempP == sent->p)
     {
-        PrintError ();
+        PrintError (sent);
 
         assert (!"SyntaxError");
     }
@@ -104,11 +109,11 @@ static int GetN ()
     return val;
 }
 
-static int PrintError ()
+static int PrintError (sentence* sent)
 {
     printf ("SyntaxError!!!\n");
-    printf ("%s\n", str);
-    printf ("%*s\n", p, "^");
+    printf ("%s\n", sent->str);
+    printf ("%*s\n", sent->p, "^");
 
     return NOMISTAKE;
 }
