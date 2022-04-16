@@ -17,6 +17,8 @@ int main ()
     printf ("adssda\n");
     t1.graphDump ();
 
+    printf ("%d\n", GetG ("345+22$"));
+
    // CTree t1 = CtorTreeFromFile ("dump/startEquation.txt");
 
     return 0;
