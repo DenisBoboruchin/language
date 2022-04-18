@@ -12,7 +12,7 @@ struct sentence
     int         p   =       0;  
 };
 
-int GetG (const char* str);
+int GetGrammar (const char* str);
 
 #define parsSymb sent->str[sent->p]
 

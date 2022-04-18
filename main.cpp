@@ -16,7 +16,7 @@ int main ()
     
     t1.graphDump ();
 
-    printf ("%d\n", GetG ("20*30+(10+5*2)*2$"));
+    printf ("%d\n", GetGrammar ("20*30+(10+5*2)*2$"));
 
    // CTree t1 = CtorTreeFromFile ("dump/startEquation.txt");
 

@@ -1,19 +1,19 @@
 #include "../include/parser.h"
 
-static int GetE (sentence* sent);
-static int GetT (sentence* sent);
-static int GetP (sentence* sent);
-static int GetN (sentence* sent);
+static int GetExpression        (sentence* sent);
+static int GetTerm              (sentence* sent);
+static int GetPrimaryExpression (sentence* sent);
+static int GetNumber            (sentence* sent);
 
-static int PrintError (sentence* sent);
+static int PrintError           (sentence* sent);
 
-int GetG (const char* str)
+int GetGrammar (const char* str)
 {
     sentence sent = {};
     sent.str = str;
     sent.p = 0;
 
-    int val = GetE (&sent);
+    int val = GetExpression (&sent);
     
     if (sent.str[sent.p] != '$')
     {
@@ -24,17 +24,17 @@ int GetG (const char* str)
     return val;
 }
 
-static int GetE (sentence* sent)
+static int GetExpression (sentence* sent)
 {
     int val = 0;
-    val = GetT (sent);
+    val = GetTerm (sent);
 
     while (parsSymb == '+' || parsSymb == '-')
     {
         int op = parsSymb;
         sent->p++;
 
-        int val2 = GetT (sent);
+        int val2 = GetTerm (sent);
 
         if (op == '+')
             val += val2;
@@ -45,17 +45,17 @@ static int GetE (sentence* sent)
     return val;
 }
 
-static int GetT (sentence* sent)
+static int GetTerm (sentence* sent)
 {
     int val = 0;
-    val = GetP (sent);
+    val = GetPrimaryExpression (sent);
 
     while (parsSymb == '*' || parsSymb == '/')
     {
         int op = parsSymb;
         sent->p++;
 
-        int val2 = GetP (sent);
+        int val2 = GetPrimaryExpression (sent);
 
         if (op == '*')
             val *= val2;
@@ -66,12 +66,12 @@ static int GetT (sentence* sent)
     return val;
 }
 
-static int GetP (sentence* sent)
+static int GetPrimaryExpression (sentence* sent)
 {
     if (parsSymb == '(')
     {
         sent->p++;
-        int val = GetE (sent);
+        int val = GetExpression (sent);
 
         if (parsSymb != ')')
         {
@@ -85,10 +85,10 @@ static int GetP (sentence* sent)
     }
 
     else
-        return GetN (sent);
+        return GetNumber (sent);
 }
 
-static int GetN (sentence* sent)
+static int GetNumber (sentence* sent)
 {
     int val = 0;
     int tempP = sent->p;
