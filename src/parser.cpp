@@ -2,6 +2,7 @@
 
 static int GetExpression        (sentence* sent);
 static int GetTerm              (sentence* sent);
+static int GetDegree            (sentence* sent);
 static int GetPrimaryExpression (sentence* sent);
 static int GetNumber            (sentence* sent);
 
@@ -26,8 +27,7 @@ int GetGrammar (const char* str)
 
 static int GetExpression (sentence* sent)
 {
-    int val = 0;
-    val = GetTerm (sent);
+    int val = GetTerm (sent);
 
     while (parsSymb == '+' || parsSymb == '-')
     {
@@ -47,20 +47,35 @@ static int GetExpression (sentence* sent)
 
 static int GetTerm (sentence* sent)
 {
-    int val = 0;
-    val = GetPrimaryExpression (sent);
+    int val = GetDegree (sent);
 
     while (parsSymb == '*' || parsSymb == '/')
     {
         int op = parsSymb;
         sent->p++;
 
-        int val2 = GetPrimaryExpression (sent);
+        int val2 = GetDegree (sent);
 
         if (op == '*')
             val *= val2;
         else
             val /= val2;   //check null
+    }
+
+    return val;
+}
+
+static int GetDegree (sentence* sent)
+{
+    int val = GetPrimaryExpression (sent);
+
+    while (parsSymb == '^')
+    {
+        sent->p++;
+
+        int val2 = GetDegree (sent);
+
+        val = (int) pow (val, val2);
     }
 
     return val;

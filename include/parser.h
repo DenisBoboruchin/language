@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <assert.h>
+#include <math.h>
 
 const int NOMISTAKE = 0;
 
