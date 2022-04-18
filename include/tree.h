@@ -116,6 +116,8 @@ public:
     int             graphDump           ();
 };
 
+item* CtorItem (typeNode type, structData data, item* left, item* right, item* parent = nullptr);
+
 int CtorElemsForDot             (struct item* node);
 int CtorEdgeForDot              (struct item* node);
 

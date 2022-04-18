@@ -152,6 +152,18 @@ int CTree::CompareAndAddItm_ (struct item* prefItm, struct item* newItm)
 //-------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------
 
+item* CtorItem (typeNode type, structData data, item* left, item* right, item* parent)
+{
+    item* newItm = new item;
+    newItm->type = type;
+    newItm->data = data;
+    newItm->left = left;
+    newItm->right = right;
+    newItm->parent = parent;
+
+    return newItm;
+}
+
 item* CTree::root ()
 {
     return treeRoot_;
