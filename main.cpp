@@ -16,7 +16,7 @@ int main ()
     
     t1.graphDump ();
 
-    printf ("%d\n", GetGrammar ("-2^(-2*(2+-3))+(10+5*2^(1+1)^3)*2$"));
+    printf ("%d\n", GetGrammar ("-2^(2-1)+(10+5*2^(1+1)^3)*2$"));
 
    // CTree t1 = CtorTreeFromFile ("dump/startEquation.txt");
 

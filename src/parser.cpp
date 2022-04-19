@@ -71,18 +71,20 @@ static int GetSign (sentence* sent)
     int op = parsSymb;
 
     if (op == '+' || op == '-')
+    {
         sent->p++;
 
-    if ((parsSymb == '+') || (parsSymb == '-'))
-    {
-        PrintError (sent);
-        assert (!"SyntaxError");
+        if ((parsSymb == '+') || (parsSymb == '-'))         //check -+-+--+ - incorrect
+        {                                                   //      3 +- 15 -   correct
+            PrintError (sent);
+            assert (!"SyntaxError");
+        }
+
+        else if (op == '-')
+            return - GetDegree (sent);
     }
 
-    if (op == '-')
-        return - GetDegree (sent);
-    else
-        return GetDegree (sent);
+    return GetDegree (sent);
 }
 
 static int GetDegree (sentence* sent)
