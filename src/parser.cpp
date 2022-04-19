@@ -4,6 +4,7 @@ static int GetExpression        (sentence* sent);
 static int GetTerm              (sentence* sent);
 static int GetDegree            (sentence* sent);
 static int GetPrimaryExpression (sentence* sent);
+static int GetSign              (sentence* sent);
 static int GetNumber            (sentence* sent);
 
 static int PrintError           (sentence* sent);
@@ -47,14 +48,14 @@ static int GetExpression (sentence* sent)
 
 static int GetTerm (sentence* sent)
 {
-    int val = GetDegree (sent);
+    int val = GetSign (sent);
 
     while (parsSymb == '*' || parsSymb == '/')
     {
         int op = parsSymb;
         sent->p++;
 
-        int val2 = GetDegree (sent);
+        int val2 = GetSign (sent);
 
         if (op == '*')
             val *= val2;
@@ -63,6 +64,25 @@ static int GetTerm (sentence* sent)
     }
 
     return val;
+}
+
+static int GetSign (sentence* sent)
+{
+    int op = parsSymb;
+
+    if (op == '+' || op == '-')
+        sent->p++;
+
+    if ((parsSymb == '+') || (parsSymb == '-'))
+    {
+        PrintError (sent);
+        assert (!"SyntaxError");
+    }
+
+    if (op == '-')
+        return - GetDegree (sent);
+    else
+        return GetDegree (sent);
 }
 
 static int GetDegree (sentence* sent)
@@ -117,7 +137,6 @@ static int GetNumber (sentence* sent)
     if (tempP == sent->p)
     {
         PrintError (sent);
-
         assert (!"SyntaxError");
     }
     
