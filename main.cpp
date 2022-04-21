@@ -17,7 +17,7 @@ int main ()
     
     t1.graphDump ();
 */
-    item* node = GetGrammar ("-2^(2-1)+(10+5*2^(1+1)^3)*2$");
+    item* node = GetGrammar ("(-2)^(2-1)+(10+5*2^(1+1)^3)*2$");
     
     CTree t1 (node);
  

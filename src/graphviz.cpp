@@ -50,7 +50,34 @@ void DotElemCtor (void* index, typeNode type, structData data, void* next, void*
     //fprintf (dotFile, ELEM_FMTS, data);
     
     fprintf (dotFile, "\\\"|{<left>left:%10p|<right>right:%10p}}\", ", next, prev);
-    fprintf (dotFile, "fillcolor=\"%s\", style=%s];\n", color, style);
+    
+    switch (type)
+    {
+        case INT:
+            fprintf (dotFile, "fillcolor=\"%s\"", color);
+            break;
+
+        case OP:
+            fprintf (dotFile, "fillcolor=\"%s\"", "aquamarine");
+            break;
+
+        case CHR:
+            fprintf (dotFile, "fillcolor=\"%s\"", "darkorchid1");
+            break;
+        
+        case STR:
+            fprintf (dotFile, "fillcolor=\"%s\"", "darkorchid1");
+            break;
+
+        case DBL:
+            fprintf (dotFile, "fillcolor=\"%s\"", color);
+            break;
+
+        default:
+            assert ("UNKNOWN TYPE!!!");
+
+    }
+    fprintf (dotFile, ", style=%s];\n", style);
 }
 /*
 void DotInfoElemCtor (int capacity, int size, int head, int tail, int free, int statLin, 
