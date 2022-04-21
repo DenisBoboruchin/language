@@ -4,6 +4,7 @@
 
 int main ()
 {
+/*
     CTree t1;
 
     t1.addItm (nullptr, "*");
@@ -15,8 +16,13 @@ int main ()
     t1.addItm (t1.findItm ("+"), "x", ADDRIGHT);
     
     t1.graphDump ();
-
-    printf ("%d\n", GetGrammar ("-2^(2-1)+(10+5*2^(1+1)^3)*2$"));
+*/
+    item* node = GetGrammar ("-2^(2-1)+(10+5*2^(1+1)^3)*2$");
+    
+    CTree t1 (node);
+ 
+    t1.graphDump ();    
+    //printf ("%d\n", GetGrammar ("-2^(2-1)+(10+5*2^(1+1)^3)*2$"));
 
    // CTree t1 = CtorTreeFromFile ("dump/startEquation.txt");
 

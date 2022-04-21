@@ -15,12 +15,39 @@ void DotCtor (const char* rankdir, const char* color)
     fprintf (dotFile, "\tnode[color=%s, fontsize = 8];\n", color);
 }
 
-void DotElemCtor (void* index, ElemType data, void* next, void* prev, const char* shape, 
+void DotElemCtor (void* index, typeNode type, structData data, void* next, void* prev, const char* shape, 
         const char* color, const char* label, const char* style)
 {
     fprintf (dotFile, "\t%s%p[shape=%s, ", label, index, shape); 
     fprintf (dotFile, "label=\"{<adress> addres\\n%p|<data> data\\n\\\"", index);
-    fprintf (dotFile, ELEM_FMTS, data);
+
+    switch (type)
+    {
+        case INT:
+            fprintf (dotFile, "%d", data.INT); 
+            break;
+
+        case OP:
+            fprintf (dotFile, "%c", data.OP);
+            break;
+
+        case CHR:
+            fprintf (dotFile, "%c", data.CHR);
+            break;
+        
+        case STR:
+            fprintf (dotFile, "%s", data.STR);
+            break;
+
+        case DBL:
+            fprintf (dotFile, "%lf", data.DBL);
+            break;
+
+        default:
+            assert ("UNKNOWN TYPE!!!");
+
+    }
+    //fprintf (dotFile, ELEM_FMTS, data);
     
     fprintf (dotFile, "\\\"|{<left>left:%10p|<right>right:%10p}}\", ", next, prev);
     fprintf (dotFile, "fillcolor=\"%s\", style=%s];\n", color, style);

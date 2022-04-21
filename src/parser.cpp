@@ -1,21 +1,21 @@
 #include "../include/parser.h"
 
-static int GetExpression        (sentence* sent);
-static int GetTerm              (sentence* sent);
-static int GetDegree            (sentence* sent);
-static int GetPrimaryExpression (sentence* sent);
-static int GetSign              (sentence* sent);
-static int GetNumber            (sentence* sent);
+static item* GetExpression        (sentence* sent);
+static item* GetTerm              (sentence* sent);
+static item* GetDegree            (sentence* sent);
+static item* GetPrimaryExpression (sentence* sent);
+static item* GetSign              (sentence* sent);
+static item* GetNumber            (sentence* sent);
 
 static int PrintError           (sentence* sent);
 
-int GetGrammar (const char* str)
+item* GetGrammar (const char* str)
 {
     sentence sent = {};
     sent.str = str;
     sent.p = 0;
 
-    int val = GetExpression (&sent);
+    item* node = GetExpression (&sent);
     
     if (sent.str[sent.p] != '$')
     {
@@ -23,50 +23,64 @@ int GetGrammar (const char* str)
         assert (!"SyntaxError, expected '$'");
     }
 
-    return val;
+    return node;
 }
 
-static int GetExpression (sentence* sent)
+static item* GetExpression (sentence* sent)
 {
-    int val = GetTerm (sent);
+    item* nodeLeft = GetTerm (sent);
+    item* node = nodeLeft;
 
     while (parsSymb == '+' || parsSymb == '-')
     {
         int op = parsSymb;
         sent->p++;
 
-        int val2 = GetTerm (sent);
+        node = new item;
+        node->type = OP;
+
+        item* nodeRight = GetTerm (sent);
 
         if (op == '+')
-            val += val2;
+            node->data.OP = add;
         else
-            val -= val2;
+            node->data.OP = sub;
+
+        node->left = nodeLeft;
+        node->right = nodeRight;
     }
 
-    return val;
+    return node;
 }
 
-static int GetTerm (sentence* sent)
+static item* GetTerm (sentence* sent)
 {
-    int val = GetSign (sent);
+    item* nodeLeft = GetSign (sent);
+    item* node = nodeLeft;
 
     while (parsSymb == '*' || parsSymb == '/')
     {
         int op = parsSymb;
         sent->p++;
 
-        int val2 = GetSign (sent);
+        node = new item;
+        node->type = OP;
+
+        item* nodeRight = GetSign (sent);
 
         if (op == '*')
-            val *= val2;
+            node->data.OP = mul;
         else
-            val /= val2;   //check null
+            node->data.OP = divv;  //check null
+     
+        node->left = nodeLeft;
+        node->right = nodeRight;
     }
 
-    return val;
+    return node;
 }
 
-static int GetSign (sentence* sent)
+static item* GetSign (sentence* sent)
 {
     int op = parsSymb;
 
@@ -81,34 +95,46 @@ static int GetSign (sentence* sent)
         }
 
         else if (op == '-')
-            return - GetDegree (sent);
+        {
+            item* node = GetDegree (sent);
+            node->data.INT = - node->data.INT;
+            
+            return node;
+        }
     }
 
     return GetDegree (sent);
 }
 
-static int GetDegree (sentence* sent)
+static item* GetDegree (sentence* sent)
 {
-    int val = GetPrimaryExpression (sent);
+    item* nodeLeft = GetPrimaryExpression (sent);
+    item* node = nodeLeft;
 
     while (parsSymb == '^')
     {
         sent->p++;
 
-        int val2 = GetDegree (sent);
+        item* nodeRight = GetDegree (sent);
 
-        val = (int) pow (val, val2);
+        node = new item;
+        node->type = OP;
+        node->data.OP = deg;
+
+        node->left = nodeLeft;
+        node->right = nodeRight;
+        //val = (int) pow (val, val2);
     }
 
-    return val;
+    return node;
 }
 
-static int GetPrimaryExpression (sentence* sent)
+static item* GetPrimaryExpression (sentence* sent)
 {
     if (parsSymb == '(')
     {
         sent->p++;
-        int val = GetExpression (sent);
+        item* node = GetExpression (sent);
 
         if (parsSymb != ')')
         {
@@ -118,14 +144,14 @@ static int GetPrimaryExpression (sentence* sent)
 
         sent->p++;
 
-        return val;
+        return node;
     }
 
     else
         return GetNumber (sent);
 }
 
-static int GetNumber (sentence* sent)
+static item* GetNumber (sentence* sent)
 {
     int val = 0;
     int tempP = sent->p;
@@ -142,7 +168,11 @@ static int GetNumber (sentence* sent)
         assert (!"SyntaxError");
     }
     
-    return val;
+    item* node = new item;
+    node->type = INT;
+    node->data.INT = val;
+
+    return node;
 }
 
 static int PrintError (sentence* sent)

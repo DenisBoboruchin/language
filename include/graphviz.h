@@ -4,12 +4,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef const char* ElemType;
-#define ELEM_FMTS "%s"
+#include "tree.h"
+
+//typedef const char* ElemType;
+//#define ELEM_FMTS "%s"
 
 void    DotCtor         (const char* rankdir = "LR", const char *color = "darkkhaki");
 
-void    DotElemCtor     (void* i, ElemType data, void* next = 0, void* prev = 0, 
+void    DotElemCtor     (void* i, typeNode type, structData data, void* next = 0, void* prev = 0, 
         const char* shape = "record", const char* color = "darkslategray1",
         const char* label = "elem", const char* style = "filled");
 //void    DotInfoElemCtor (int capacity, int size, int head, int tail, 
@@ -22,7 +24,5 @@ void    DotRightEdgeCtor     (void* num1, void* num2, const char* style = "none"
 void    DotPrintf       (const char* text, int num = -1);
 
 void    DotEnd          (void);   
-
-#undef ElemType
 
 #endif

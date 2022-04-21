@@ -5,7 +5,6 @@
 #include <string.h>
 #include <assert.h>
 
-#include "graphviz.h"
 #include "../include/parser.h"
 
 const int           DESTROYSZ   =     -12323;
@@ -19,6 +18,8 @@ const int           NOTFOUND    =       -583;
 const int           STARTNUM    =          7;
 
 const int           MAXANSWSIZE =         50;
+
+#define ElemType const char*
 
 // для добавления в конкретно правую или левую ветку
 enum addMode
@@ -43,14 +44,18 @@ enum typeNode
     DBL         =    512,
     CHR         =    123,
     INT         =    213,
-    OPERATOR    =   2139
+    STR         =    334,
+    OP          =   2140
 };
 
 enum operate
 {
     def     =   '.',
     mul     =   '*',
-    sub     =   '+'
+    divv    =   '/',
+    add     =   '+',
+    sub     =   '-',
+    deg     =   '^'
 };
 
 //-------------------------------------------------------------------------
@@ -64,7 +69,7 @@ enum operate
 struct structData
 {
     int             INT     =       0;
-    double          DOUBLE  =       0;
+    double          DBL     =       0;
     char            CHR     =       0;
     const char*     STR     = nullptr;
     operate         OP      =     def;
@@ -88,6 +93,8 @@ struct buf
     int             counter     =          0;
 };
 
+#include "graphviz.h"
+
 class CTree
 {
 private:
@@ -103,6 +110,7 @@ public:
     struct buf      buff        =         {};
     
     explicit        CTree               ();
+    explicit        CTree               (item* node);
                     ~CTree              ();
 
                     CTree               (const CTree& obj);

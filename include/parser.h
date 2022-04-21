@@ -5,6 +5,8 @@
 #include <assert.h>
 #include <math.h>
 
+#include "../include/tree.h"
+
 const int NOMISTAKE = 0;
 
 struct sentence 
@@ -13,7 +15,7 @@ struct sentence
     int         p   =       0;  
 };
 
-int GetGrammar (const char* str);
+struct item* GetGrammar (const char* str);
 
 #define parsSymb sent->str[sent->p]
 

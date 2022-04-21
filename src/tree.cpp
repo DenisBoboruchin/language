@@ -30,6 +30,11 @@ CTree::CTree () :
     size_       (0) 
     {}
 
+CTree::CTree (item* node):
+    treeRoot_   (node),
+    size_       (0)
+    {}
+
 CTree::~CTree ()
 {
     printf ("Вызван деструктор\n");
@@ -275,7 +280,7 @@ int CtorElemsForDot (struct item* node)
         return NOMISTAKE;
     }  
 
-    DotElemCtor (node, node->data.STR, node->left, node->right);
+    DotElemCtor (node, node->type, node->data, node->left, node->right);
 
     if (node->left)
         CtorElemsForDot (node->left);
