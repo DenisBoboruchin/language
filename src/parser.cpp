@@ -6,6 +6,7 @@ static item* GetDegree            (sentence* sent);
 static item* GetPrimaryExpression (sentence* sent);
 static item* GetSign              (sentence* sent);
 static item* GetNumber            (sentence* sent);
+static item* GetWord              (sentence* sent);
 
 static int PrintError           (sentence* sent);
 
@@ -96,9 +97,12 @@ static item* GetSign (sentence* sent)
 
         else if (op == '-')
         {
-            item* node = GetDegree (sent);
-            node->data.INT = - node->data.INT;
+            item* node = new item;
             
+            node->type = OP;
+            node->data.OP = sub;
+            node->left = GetDegree (sent);
+
             return node;
         }
     }
@@ -160,17 +164,55 @@ static item* GetNumber (sentence* sent)
     {
         val = val * 10 + (parsSymb - '0');
         sent->p++;
+
+        if (('a' <= parsSymb && parsSymb <= 'z') || ('A' <= parsSymb && parsSymb <= 'Z'))
+        {
+            PrintError (sent);
+            assert (!"SyntaxError");
+        }
     }
+
+    item* node = nullptr;
+    if (tempP != sent->p)
+    {
+        node = new item;
+        node->type = INT;
+        node->data.INT = val;
+    }
+
+    else
+        node = GetWord (sent);
+
+    return node;
+}
+
+static item* GetWord (sentence* sent)
+{
+    char* word = new char[MAXWORDLEN];
+    int counter = 0;
+
+    int tempP = sent->p;
+
+    while (('a' <= parsSymb && parsSymb <= 'z') || ('A' <= parsSymb && parsSymb <= 'Z'))
+    {
+        word[counter] = parsSymb;
+        sent->p++;
+        counter++;
+
+        if (counter >= MAXWORDLEN - 1)
+            assert (!"SyntaxError!!! very long word");
+    }
+    word[counter] = '\0';
 
     if (tempP == sent->p)
     {
         PrintError (sent);
         assert (!"SyntaxError");
     }
-    
+
     item* node = new item;
-    node->type = INT;
-    node->data.INT = val;
+    node->type = STR;
+    node->data.STR = word;
 
     return node;
 }

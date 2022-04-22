@@ -7,7 +7,8 @@
 
 #include "../include/tree.h"
 
-const int NOMISTAKE = 0;
+const int NOMISTAKE     =  0;
+const int MAXWORDLEN    = 20;
 
 struct sentence 
 {

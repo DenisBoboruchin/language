@@ -66,7 +66,7 @@ void DotElemCtor (void* index, typeNode type, structData data, void* next, void*
             break;
         
         case STR:
-            fprintf (dotFile, "fillcolor=\"%s\"", "darkorchid1");
+            fprintf (dotFile, "fillcolor=\"%s\"", "aqua");
             break;
 
         case DBL:
