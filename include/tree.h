@@ -113,19 +113,22 @@ public:
     explicit        CTree               (item* node);
                     ~CTree              ();
 
-                    CTree               (const CTree& obj);
+                    CTree               (const CTree& tree);
 
     struct item*    addItm              (struct item* prefItm, ElemType data, int mode = STANDART);
     struct item*    findItm             (ElemType data);
 
     void            addBuffer           (char* buffer);
 
+    CTree           operator=           (const CTree& tree) = delete;
+
     item*           root                ();
     int             graphDump           ();
 };
 
+item* CopyTree (item* node);
 item* CtorItem (typeNode type, structData data, item* left, item* right, item* parent = nullptr);
-
+item* CopyItem (item* item);
 int CtorElemsForDot             (struct item* node);
 int CtorEdgeForDot              (struct item* node);
 

@@ -41,6 +41,26 @@ CTree::~CTree ()
     TreeDtor_ (treeRoot_);
 }
 
+CTree::CTree (const CTree& tree)
+{
+    treeRoot_ = CopyTree (tree.treeRoot_);    
+}
+
+item* CopyTree (item* node)
+{
+    if (node == nullptr)
+        return node;
+
+    item* newNode = CopyItem (node);
+    
+    if (node->left)
+        newNode->left = CopyTree (node->left);
+    if (node->right)
+        newNode->right = CopyTree (node->right);
+
+    return newNode;
+}
+
 void CTree::TreeDtor_ (struct item* node)
 {
     if (node == nullptr)
@@ -167,6 +187,19 @@ item* CtorItem (typeNode type, structData data, item* left, item* right, item* p
     newItm->parent = parent;
 
     return newItm;
+}
+
+item* CopyItem (item* startItem)
+{
+    item* newItem = new item;
+
+    newItem->type = startItem->type;
+    newItem->data = startItem->data;
+    //newItm->left = item->left;
+    //newItm->right = item->right;
+    //newItm->parent = item->parent;
+
+    return newItem;
 }
 
 item* CTree::root ()
