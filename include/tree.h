@@ -120,7 +120,7 @@ public:
 
     void            addBuffer           (char* buffer);
 
-    CTree           operator=           (const CTree& tree) = delete;
+    CTree           operator=           (const CTree& tree);
 
     item*           root                ();
     int             graphDump           ();

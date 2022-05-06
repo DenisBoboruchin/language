@@ -8,6 +8,7 @@ int main ()
     
     CTree t1 (node);
     CTree t2 (t1);
+    CTree t3 = t2;
 
     t2.graphDump ();
 

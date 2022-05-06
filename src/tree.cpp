@@ -46,6 +46,11 @@ CTree::CTree (const CTree& tree)
     treeRoot_ = CopyTree (tree.treeRoot_);    
 }
 
+CTree CTree::operator= (const CTree& tree)
+{
+    return CTree (tree);
+}
+
 item* CopyTree (item* node)
 {
     if (node == nullptr)
