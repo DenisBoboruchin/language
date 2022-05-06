@@ -1,15 +1,15 @@
-# **DIFFERENCIATOR**
-Это мой дифференциатор.
+# **MY LANGUAGE**
+Это мой язык программирования.
 ____
 ## **Использование**
 
 #### Чтобы клонировать репозиторий используйте:
 ```
-git clone https://github.com/DenisBoboruchin/differenciator
+git clone https://github.com/DenisBoboruchin/language.git
 ```
 #### Чтобы запустить дифференциатор используйте:
 ```
-cd differenciator
+cd language
 make
 ./main
 ```
