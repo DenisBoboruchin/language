@@ -25,58 +25,50 @@ void DotElemCtor (void* index, typeNode type, structData data, void* next, void*
     {
         case INT:
             fprintf (dotFile, "%d", data.INT); 
+            fprintf (dotFile, "\\\"|{<left>left:%10p|<right>right:%10p}}\", ", next, prev);
+            fprintf (dotFile, "fillcolor=\"%s\"", color);
             break;
 
         case OP:
-            fprintf (dotFile, "%c", data.OP);
+            fprintf (dotFile, "%c", data.OP); 
+            fprintf (dotFile, "\\\"|{<left>left:%10p|<right>right:%10p}}\", ", next, prev);
+            fprintf (dotFile, "fillcolor=\"%s\"", "aquamarine");
+
             break;
 
         case CHR:
-            fprintf (dotFile, "%c", data.CHR);
+            fprintf (dotFile, "%c", data.CHR); 
+            fprintf (dotFile, "\\\"|{<left>left:%10p|<right>right:%10p}}\", ", next, prev);
+            fprintf (dotFile, "fillcolor=\"%s\"", "darkorchid1");
+
             break;
         
         case STR:
             fprintf (dotFile, "%s", data.STR);
-            break;
-
-        case DBL:
-            fprintf (dotFile, "%lf", data.DBL);
-            break;
-
-        default:
-            assert ("UNKNOWN TYPE!!!");
-
-    }
-    //fprintf (dotFile, ELEM_FMTS, data);
-    
-    fprintf (dotFile, "\\\"|{<left>left:%10p|<right>right:%10p}}\", ", next, prev);
-    
-    switch (type)
-    {
-        case INT:
-            fprintf (dotFile, "fillcolor=\"%s\"", color);
-            break;
-
-        case OP:
-            fprintf (dotFile, "fillcolor=\"%s\"", "aquamarine");
-            break;
-
-        case CHR:
-            fprintf (dotFile, "fillcolor=\"%s\"", "darkorchid1");
-            break;
-        
-        case STR:
+            fprintf (dotFile, "\\\"|{<left>left:%10p|<right>right:%10p}}\", ", next, prev);
             fprintf (dotFile, "fillcolor=\"%s\"", "aqua");
+
             break;
 
         case DBL:
+            fprintf (dotFile, "%lf", data.DBL); 
+            fprintf (dotFile, "\\\"|{<left>left:%10p|<right>right:%10p}}\", ", next, prev);
             fprintf (dotFile, "fillcolor=\"%s\"", color);
+
+            break;
+
+        case CONSTR:
+            fprintf (dotFile, "%d", data.CONSTR); 
+            fprintf (dotFile, "\\\"|{<left>left:%10p|<right>right:%10p}}\", ", next, prev);
+            fprintf (dotFile, "fillcolor= \"%s\"", "darkseagreen1");
+
             break;
 
         default:
             assert ("UNKNOWN TYPE!!!");
 
     }
+
     fprintf (dotFile, ", style=%s];\n", style);
 }
 /*

@@ -1,14 +1,17 @@
 #include "../include/parser.h"
 
-static item* GetExpression        (sentence* sent);
-static item* GetTerm              (sentence* sent);
-static item* GetDegree            (sentence* sent);
-static item* GetPrimaryExpression (sentence* sent);
-static item* GetSign              (sentence* sent);
-static item* GetNumber            (sentence* sent);
-static item* GetWord              (sentence* sent);
+static item* GetEqual               (sentence* sent);
+static item* GetExpression          (sentence* sent);
+static item* GetTerm                (sentence* sent);
+static item* GetDegree              (sentence* sent);
+static item* GetPrimaryExpression   (sentence* sent);
+static item* GetSign                (sentence* sent);
+static item* GetNumber              (sentence* sent);
+static item* GetWord                (sentence* sent);
 
-static int PrintError           (sentence* sent);
+static int PrintError               (sentence* sent);
+
+static constr CheckConstruction        (const char* word);
 
 item* GetGrammar (const char* str)
 {
@@ -16,13 +19,41 @@ item* GetGrammar (const char* str)
     sent.str = str;
     sent.p = 0;
 
-    item* node = GetExpression (&sent);
+    item* node = GetEqual (&sent);
     
     if (sent.str[sent.p] != '$')
     {
         PrintError (&sent);
         assert (!"SyntaxError, expected '$'");
     }
+
+    return node;
+}
+
+static item* GetEqual (sentence* sent)
+{
+    item* temp = GetWord (sent);
+    if ((temp->type == ERR) || (temp->type == CONSTR))
+    { 
+        if (parsSymb == '=')
+        {  
+            PrintError (sent);
+            assert (!"SyntaxError, expected '='");
+        }
+        else
+            return GetExpression (sent);
+    }
+
+    if (parsSymb != '=')
+        return GetExpression (sent);
+
+    sent->p++;
+    item* node = new item;
+    node->type = OP;
+    node->data.OP = equ;
+
+    node->left = temp;
+    node->right = GetExpression (sent);
 
     return node;
 }
@@ -204,17 +235,42 @@ static item* GetWord (sentence* sent)
     }
     word[counter] = '\0';
 
+    item* node = new item;
+
     if (tempP == sent->p)
     {
-        PrintError (sent);
-        assert (!"SyntaxError");
+        node->type = ERR;
+        //PrintError (sent);
+        //assert (!"SyntaxError");
+    }
+    
+    constr checkConstr = CheckConstruction (word);
+    if (checkConstr)
+    {
+        node->type = CONSTR;
+        node->data.CONSTR  = checkConstr;
     }
 
-    item* node = new item;
-    node->type = STR;
-    node->data.STR = word;
-
+    else
+    {
+        node->type = STR;
+        node->data.STR  = word;
+    } 
     return node;
+}
+
+static constr CheckConstruction (const char* word)
+{
+    if (!strcmp (word, "if"))
+        return mif;
+
+    else if (!strcmp (word, "for"))
+        return mfor;
+
+    else if (!strcmp (word, "while"))
+        return mwhile;
+
+    return str;
 }
 
 static int PrintError (sentence* sent)

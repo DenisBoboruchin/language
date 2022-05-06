@@ -41,11 +41,13 @@ enum comp
 // тип узла 
 enum typeNode
 {
+    ERR         =   -442,
     DBL         =    512,
     CHR         =    123,
     INT         =    213,
     STR         =    334,
-    OP          =   2140
+    OP          =   2140,
+    CONSTR      =    777
 };
 
 enum operate
@@ -55,9 +57,17 @@ enum operate
     divv    =   '/',
     add     =   '+',
     sub     =   '-',
-    deg     =   '^'
+    deg     =   '^',
+    equ     =   '='
 };
 
+enum constr
+{
+    str     =   0,
+    mif          ,
+    mwhile       ,
+    mfor  
+};
 //-------------------------------------------------------------------------
 //--------------------------TYPE_OF_THE_TREE-------------------------------
 //-------------------------------------------------------------------------
@@ -73,6 +83,7 @@ struct structData
     char            CHR     =       0;
     const char*     STR     = nullptr;
     operate         OP      =     def;
+    constr          CONSTR  =     str;
 };
 
 struct item

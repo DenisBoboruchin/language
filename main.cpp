@@ -4,7 +4,7 @@
 
 int main ()
 {
-    item* node = GetGrammar ("-word^(2-1)+(10+5*2^(1+1)^3)*2$");
+    item* node = GetGrammar ("y=-word^(2-1)+(10+5*2^(1+1)^3)*3$");
     
     CTree t1 (node);
     CTree t2 (t1);
