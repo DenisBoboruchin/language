@@ -37,19 +37,36 @@ static item* GetStr (sentence* sent)
     item* nodeLeft = GetEqual (sent);
     item* node = nodeLeft;
 
+    if (parsSymb != ';')
+    {
+        PrintError (sent);
+        assert (!"SyntaxError, expected ';'");
+    }
+
     while (parsSymb == ';')
     {
         nodeLeft = node;
         sent->p++;
     
-        printf ("ctorrr\n");
+        item* nodeRight = GetEqual (sent);
+ 
+        if (nodeRight->type == ERR)
+            return node;
+
+        if (parsSymb != ';')
+        {
+            PrintError (sent);
+            assert (!"SyntaxError, expected ';'");
+        }
+
         node = new item;
         node->type = OP;
 
         node->data.OP = semicolon;
 
         node->left = nodeLeft;
-        node->right = GetEqual (sent);
+
+        node->right = nodeRight;
     }
 
     return node;
@@ -298,6 +315,8 @@ static item* GetWord (sentence* sent)
     if (tempP == sent->p)
     {
         node->type = ERR;
+        
+        return node;
         //PrintError (sent);
         //assert (!"SyntaxError");
     }
