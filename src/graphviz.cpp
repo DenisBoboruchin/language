@@ -23,6 +23,9 @@ void DotElemCtor (void* index, typeNode type, structData data, void* next, void*
 
     switch (type)
     {
+        case ERR:
+            break;
+
         case INT:
             fprintf (dotFile, "%d", data.INT); 
             fprintf (dotFile, "\\\"|{<left>left:%10p|<right>right:%10p}}\", ", next, prev);
@@ -30,9 +33,16 @@ void DotElemCtor (void* index, typeNode type, structData data, void* next, void*
             break;
 
         case OP:
-            fprintf (dotFile, "%c", data.OP); 
+            if ((data.OP == '>') || (data.OP == '<'))
+                fprintf (dotFile, "\\%c", data.OP);
+            else
+                fprintf (dotFile, "%c", data.OP); 
             fprintf (dotFile, "\\\"|{<left>left:%10p|<right>right:%10p}}\", ", next, prev);
-            fprintf (dotFile, "fillcolor=\"%s\"", "aquamarine");
+            
+            if (data.OP == semicolon)                
+                fprintf (dotFile, "fillcolor=\"%s\"", "lightgray");
+            else
+                fprintf (dotFile, "fillcolor=\"%s\"", "aquamarine");
 
             break;
 

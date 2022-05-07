@@ -52,13 +52,16 @@ enum typeNode
 
 enum operate
 {
-    def     =   '.',
-    mul     =   '*',
-    divv    =   '/',
-    add     =   '+',
-    sub     =   '-',
-    deg     =   '^',
-    equ     =   '='
+    def         =   '.',
+    mul         =   '*',
+    divv        =   '/',
+    add         =   '+',
+    sub         =   '-',
+    deg         =   '^',
+    semicolon   =   ';',
+    more        =   '>',
+    smaller     =   '<',
+    equ         =   '='
 };
 
 enum constr

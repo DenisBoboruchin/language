@@ -1,6 +1,8 @@
 #include "../include/parser.h"
 
+static item* GetStr                 (sentence* sent);
 static item* GetEqual               (sentence* sent);
+static item* GetComparison          (sentence* sent);
 static item* GetExpression          (sentence* sent);
 static item* GetTerm                (sentence* sent);
 static item* GetDegree              (sentence* sent);
@@ -19,7 +21,7 @@ item* GetGrammar (const char* str)
     sent.str = str;
     sent.p = 0;
 
-    item* node = GetEqual (&sent);
+    item* node = GetStr (&sent);
     
     if (sent.str[sent.p] != '$')
     {
@@ -30,9 +32,32 @@ item* GetGrammar (const char* str)
     return node;
 }
 
+static item* GetStr (sentence* sent)
+{
+    item* nodeLeft = GetEqual (sent);
+    item* node = nodeLeft;
+
+    while (parsSymb == ';')
+    {
+        nodeLeft = node;
+        sent->p++;
+    
+        printf ("ctorrr\n");
+        node = new item;
+        node->type = OP;
+
+        node->data.OP = semicolon;
+
+        node->left = nodeLeft;
+        node->right = GetEqual (sent);
+    }
+
+    return node;
+}
+
 static item* GetEqual (sentence* sent)
 {
-    item* temp = GetWord (sent);
+    item* temp = GetExpression (sent);                      //
     if ((temp->type == ERR) || (temp->type == CONSTR))
     { 
         if (parsSymb == '=')
@@ -41,11 +66,11 @@ static item* GetEqual (sentence* sent)
             assert (!"SyntaxError, expected '='");
         }
         else
-            return GetExpression (sent);
+            return temp;                                    //
     }
 
     if (parsSymb != '=')
-        return GetExpression (sent);
+        return temp;                                        //
 
     sent->p++;
     item* node = new item;
@@ -53,9 +78,42 @@ static item* GetEqual (sentence* sent)
     node->data.OP = equ;
 
     node->left = temp;
+    node->right = GetComparison (sent);
+
+    return node;
+}
+///////////////////////////////////////////////////////////////////////////
+static item* GetComparison (sentence* sent)
+{
+    item* temp = GetExpression (sent);
+    if ((temp->type == ERR) || (temp->type == CONSTR))
+    { 
+        if ((parsSymb == '>') || (parsSymb == '<'))
+        {  
+            PrintError (sent);
+            assert (!"SyntaxError, expected '='");
+        }
+        else
+            return temp;
+    }
+
+    int op = parsSymb;
+    if ((op != '>') && (op != '<'))
+        return temp;
+
+    sent->p++;
+    item* node = new item;
+    node->type = OP;
+    if (op == '>')
+        node->data.OP = more;
+    else
+        node->data.OP = smaller;
+
+    node->left = temp;
     node->right = GetExpression (sent);
 
     return node;
+
 }
 
 static item* GetExpression (sentence* sent)
