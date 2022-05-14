@@ -2,6 +2,7 @@
 
 static item* GetStr                 (sentence* sent);
 static item* GetIf                  (sentence* sent);
+static item* GetPrimaryBody         (sentence* sent);
 static item* GetEqual               (sentence* sent);
 static item* GetPrimaryComparison   (sentence* sent);
 static item* GetComparison          (sentence* sent);
@@ -88,7 +89,28 @@ static item* GetIf (sentence* sent)
 
     node->left = GetPrimaryComparison (sent);            // can't =
 
-    node->right = GetEqual (sent);                             // primary mb...
+    node->right = GetPrimaryBody (sent);                             // primary mb...
+
+    return node;
+}
+
+static item* GetPrimaryBody (sentence* sent)
+{ 
+    if (parsSymb != '{')
+    {
+        PrintError (sent);
+        assert (!"SyntaxError, expected '{'");
+    }
+    sent->p++;
+
+    item* node = GetStr (sent);
+
+    if (parsSymb != '}')
+    {
+        PrintError (sent);
+        assert (!"SyntaxError, expected '}'");
+    }
+    sent->p++;
 
     return node;
 }
