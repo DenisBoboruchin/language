@@ -1,7 +1,9 @@
 #include "../include/parser.h"
 
 static item* GetStr                 (sentence* sent);
+static item* GetIf                  (sentence* sent);
 static item* GetEqual               (sentence* sent);
+static item* GetPrimaryComparison   (sentence* sent);
 static item* GetComparison          (sentence* sent);
 static item* GetExpression          (sentence* sent);
 static item* GetTerm                (sentence* sent);
@@ -34,7 +36,7 @@ item* GetGrammar (const char* str)
 
 static item* GetStr (sentence* sent)
 {
-    item* nodeLeft = GetEqual (sent);
+    item* nodeLeft = GetIf (sent);
     item* node = nodeLeft;
 
     if (parsSymb != ';')
@@ -48,7 +50,7 @@ static item* GetStr (sentence* sent)
         nodeLeft = node;
         sent->p++;
     
-        item* nodeRight = GetEqual (sent);
+        item* nodeRight = GetIf (sent);
  
         if (nodeRight->type == ERR)
             return node;
@@ -68,6 +70,25 @@ static item* GetStr (sentence* sent)
 
         node->right = nodeRight;
     }
+
+    return node;
+}
+
+static item* GetIf (sentence* sent)
+{
+    int temp = sent->p;
+    item* node = GetWord (sent);
+
+    if (node->data.CONSTR != mif)
+    {
+        sent->p = temp;
+        delete[] node;
+        return GetEqual (sent);
+    }
+
+    node->left = GetPrimaryComparison (sent);            // can't =
+
+    node->right = GetEqual (sent);                             // primary mb...
 
     return node;
 }
@@ -98,6 +119,31 @@ static item* GetEqual (sentence* sent)
     node->right = GetComparison (sent);
 
     return node;
+}
+
+static item* GetPrimaryComparison (sentence* sent)
+{
+    if (parsSymb == '(')
+    {
+        sent->p++;
+        item* node = GetComparison (sent);
+
+        if (parsSymb != ')')
+        {
+            PrintError (sent);
+            assert (!"SyntaxError, expected ')'");
+        }
+
+        sent->p++;
+
+        return node;
+    }
+
+    else
+    {
+        PrintError (sent);
+        assert (!"SyntaxError, expected '('");
+    }
 }
 ///////////////////////////////////////////////////////////////////////////
 static item* GetComparison (sentence* sent)
