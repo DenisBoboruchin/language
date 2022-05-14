@@ -18,6 +18,8 @@ static int PrintError               (sentence* sent);
 
 static constr CheckConstruction        (const char* word);
 
+static int  SkipTabs (sentence* sent);
+
 item* GetGrammar (const char* str)
 {
     sentence sent = {};
@@ -37,6 +39,8 @@ item* GetGrammar (const char* str)
 
 static item* GetStr (sentence* sent)
 {
+    SkipTabs (sent);
+
     item* nodeLeft = GetIf (sent);
     item* node = nodeLeft;
 
@@ -49,8 +53,9 @@ static item* GetStr (sentence* sent)
     while (parsSymb == ';')
     {
         nodeLeft = node;
-        sent->p++;
-    
+        sent->p++;  
+        SkipTabs (sent);
+
         item* nodeRight = GetIf (sent);
  
         if (nodeRight->type == ERR)
@@ -76,8 +81,12 @@ static item* GetStr (sentence* sent)
 }
 
 static item* GetIf (sentence* sent)
-{
+{   
+    SkipTabs (sent);
+
     int temp = sent->p;
+    SkipTabs (sent);
+
     item* node = GetWord (sent);
 
     if (node->data.CONSTR != mif)
@@ -96,12 +105,15 @@ static item* GetIf (sentence* sent)
 
 static item* GetPrimaryBody (sentence* sent)
 { 
+    SkipTabs (sent);
+
     if (parsSymb != '{')
     {
         PrintError (sent);
         assert (!"SyntaxError, expected '{'");
     }
     sent->p++;
+    SkipTabs (sent);
 
     item* node = GetStr (sent);
 
@@ -111,12 +123,15 @@ static item* GetPrimaryBody (sentence* sent)
         assert (!"SyntaxError, expected '}'");
     }
     sent->p++;
+    SkipTabs (sent);
 
     return node;
 }
 
 static item* GetEqual (sentence* sent)
 {
+    SkipTabs (sent);
+
     item* temp = GetExpression (sent);                      //
     if ((temp->type == ERR) || (temp->type == CONSTR))
     { 
@@ -133,6 +148,8 @@ static item* GetEqual (sentence* sent)
         return temp;                                        //
 
     sent->p++;
+    SkipTabs (sent);
+
     item* node = new item;
     node->type = OP;
     node->data.OP = equ;
@@ -145,9 +162,13 @@ static item* GetEqual (sentence* sent)
 
 static item* GetPrimaryComparison (sentence* sent)
 {
+    SkipTabs (sent);
+
     if (parsSymb == '(')
     {
         sent->p++;
+        SkipTabs (sent);
+
         item* node = GetComparison (sent);
 
         if (parsSymb != ')')
@@ -157,6 +178,7 @@ static item* GetPrimaryComparison (sentence* sent)
         }
 
         sent->p++;
+        SkipTabs (sent);
 
         return node;
     }
@@ -170,6 +192,8 @@ static item* GetPrimaryComparison (sentence* sent)
 ///////////////////////////////////////////////////////////////////////////
 static item* GetComparison (sentence* sent)
 {
+    SkipTabs (sent);
+
     item* temp = GetExpression (sent);
     if ((temp->type == ERR) || (temp->type == CONSTR))
     { 
@@ -187,6 +211,8 @@ static item* GetComparison (sentence* sent)
         return temp;
 
     sent->p++;
+    SkipTabs (sent);
+
     item* node = new item;
     node->type = OP;
     if (op == '>')
@@ -203,6 +229,8 @@ static item* GetComparison (sentence* sent)
 
 static item* GetExpression (sentence* sent)
 {
+    SkipTabs (sent);
+
     item* nodeLeft = GetTerm (sent);
     item* node = nodeLeft;
 
@@ -210,6 +238,7 @@ static item* GetExpression (sentence* sent)
     {
         int op = parsSymb;
         sent->p++;
+        SkipTabs (sent);
 
         node = new item;
         node->type = OP;
@@ -230,6 +259,8 @@ static item* GetExpression (sentence* sent)
 
 static item* GetTerm (sentence* sent)
 {
+    SkipTabs (sent);
+
     item* nodeLeft = GetSign (sent);
     item* node = nodeLeft;
 
@@ -237,6 +268,7 @@ static item* GetTerm (sentence* sent)
     {
         int op = parsSymb;
         sent->p++;
+        SkipTabs (sent);
 
         node = new item;
         node->type = OP;
@@ -257,11 +289,14 @@ static item* GetTerm (sentence* sent)
 
 static item* GetSign (sentence* sent)
 {
+    SkipTabs (sent);
+
     int op = parsSymb;
 
     if (op == '+' || op == '-')
     {
         sent->p++;
+        SkipTabs (sent);
 
         if ((parsSymb == '+') || (parsSymb == '-'))         //check -+-+--+ - incorrect
         {                                                   //      3 +- 15 -   correct
@@ -286,12 +321,15 @@ static item* GetSign (sentence* sent)
 
 static item* GetDegree (sentence* sent)
 {
+    SkipTabs (sent);
+
     item* nodeLeft = GetPrimaryExpression (sent);
     item* node = nodeLeft;
 
     while (parsSymb == '^')
     {
         sent->p++;
+        SkipTabs (sent);
 
         item* nodeRight = GetDegree (sent);
 
@@ -309,9 +347,13 @@ static item* GetDegree (sentence* sent)
 
 static item* GetPrimaryExpression (sentence* sent)
 {
+    SkipTabs (sent);
+
     if (parsSymb == '(')
     {
         sent->p++;
+        SkipTabs (sent);
+
         item* node = GetExpression (sent);
 
         if (parsSymb != ')')
@@ -321,6 +363,7 @@ static item* GetPrimaryExpression (sentence* sent)
         }
 
         sent->p++;
+        SkipTabs (sent);
 
         return node;
     }
@@ -331,6 +374,8 @@ static item* GetPrimaryExpression (sentence* sent)
 
 static item* GetNumber (sentence* sent)
 {
+    SkipTabs (sent);
+
     int val = 0;
     int tempP = sent->p;
 
@@ -338,6 +383,7 @@ static item* GetNumber (sentence* sent)
     {
         val = val * 10 + (parsSymb - '0');
         sent->p++;
+        SkipTabs (sent);
 
         if (('a' <= parsSymb && parsSymb <= 'z') || ('A' <= parsSymb && parsSymb <= 'Z'))
         {
@@ -362,6 +408,8 @@ static item* GetNumber (sentence* sent)
 
 static item* GetWord (sentence* sent)
 {
+    SkipTabs (sent);
+
     char* word = new char[MAXWORDLEN];
     int counter = 0;
 
@@ -425,4 +473,12 @@ static int PrintError (sentence* sent)
     printf ("%*s\n", sent->p, "^");
 
     return NOMISTAKE;
+}
+
+static int  SkipTabs (sentence* sent)
+{
+    while ((parsSymb == '\n') || (parsSymb == '\t') || (parsSymb == ' '))
+        sent->p++;
+    
+    return 0;
 }
