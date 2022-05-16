@@ -12,8 +12,14 @@ const int MAXWORDLEN    = 20;
 
 struct sentence 
 {
-    const char* str = nullptr;
-    int         p   =       0;  
+    const char* str         = nullptr;
+    int         p           =       0;
+    int         pStart      =       0; 
+    int         line        =       1;
+
+    int         labelPoint  =       0;
+    int         labelSize   =       0;
+    char**      label       = nullptr; 
 };
 
 struct item* GetGrammar (const char* str);

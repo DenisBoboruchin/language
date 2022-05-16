@@ -46,6 +46,7 @@ enum typeNode
     CHR         =    123,
     INT         =    213,
     STR         =    334,
+    STRID       =     23,
     OP          =   2140,
     CONSTR      =    777
 };
@@ -85,6 +86,7 @@ struct structData
     double          DBL     =       0;
     char            CHR     =       0;
     const char*     STR     = nullptr;
+    int             STRID   =       0;
     operate         OP      =     def;
     constr          CONSTR  =     str;
 };

@@ -1,9 +1,9 @@
 #include "../include/translator.h"
 
-struct stat stbuf;
-
 size_t GetSizeBuf(const char* origName)
 {
+    struct stat stbuf;
+
     assert (origName != NULL);
 
     stat(origName, &stbuf);

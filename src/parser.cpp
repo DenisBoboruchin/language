@@ -16,15 +16,19 @@ static item* GetWord                (sentence* sent);
 
 static int PrintError               (sentence* sent);
 
-static constr CheckConstruction        (const char* word);
-
-static int  SkipTabs (sentence* sent);
+static constr   CheckConstruction   (const char* word);
+static int      CheckLabel          (sentence* sent, char* word);
+static int      SkipTabs            (sentence* sent);
 
 item* GetGrammar (const char* str)
 {
     sentence sent = {};
     sent.str = str;
     sent.p = 0;
+    
+    sent.labelPoint = 0;
+    sent.labelSize  = MAXWORDLEN;
+    sent.label      = new char* [MAXWORDLEN];
 
     item* node = GetStr (&sent);
     
@@ -133,6 +137,8 @@ static item* GetEqual (sentence* sent)
     SkipTabs (sent);
 
     item* temp = GetExpression (sent);                      //
+
+    SkipTabs (sent);
     if ((temp->type == ERR) || (temp->type == CONSTR))
     { 
         if (parsSymb == '=')
@@ -383,7 +389,6 @@ static item* GetNumber (sentence* sent)
     {
         val = val * 10 + (parsSymb - '0');
         sent->p++;
-        SkipTabs (sent);
 
         if (('a' <= parsSymb && parsSymb <= 'z') || ('A' <= parsSymb && parsSymb <= 'Z'))
         {
@@ -403,6 +408,7 @@ static item* GetNumber (sentence* sent)
     else
         node = GetWord (sent);
 
+    SkipTabs (sent);
     return node;
 }
 
@@ -415,7 +421,8 @@ static item* GetWord (sentence* sent)
 
     int tempP = sent->p;
 
-    while (('a' <= parsSymb && parsSymb <= 'z') || ('A' <= parsSymb && parsSymb <= 'Z'))
+    while (('a' <= parsSymb && parsSymb <= 'z') || ('A' <= parsSymb && parsSymb <= 'Z') ||
+           ('0' <= parsSymb && parsSymb <= '9'))
     {
         word[counter] = parsSymb;
         sent->p++;
@@ -446,10 +453,29 @@ static item* GetWord (sentence* sent)
 
     else
     {
-        node->type = STR;
-        node->data.STR  = word;
-    } 
+        int wordId = CheckLabel (sent, word); 
+
+        node->type = STRID;
+        node->data.STRID  = wordId;
+    }
+
+    SkipTabs (sent); 
     return node;
+}
+
+static int CheckLabel (sentence* sent, char* word)
+{
+    for (int i = 0; i < sent->labelPoint; i++)
+    {
+        if (!strcmp (word, sent->label[i]))
+            return i;
+    }
+    
+    int wordId = sent->labelPoint;
+    sent->label[wordId] = word;
+    sent->labelPoint++;
+
+    return wordId;
 }
 
 static constr CheckConstruction (const char* word)
@@ -469,16 +495,32 @@ static constr CheckConstruction (const char* word)
 static int PrintError (sentence* sent)
 {
     printf ("SyntaxError!!!\n");
-    printf ("%s\n", sent->str);
-    printf ("%*s\n", sent->p, "^");
+    printf ("in line: %4d\n", sent->line);
+    
+    int i = sent->pStart;;
+    while (sent->str[i] != '\n')
+    {
+        putchar (sent->str[i]);
+        i++;
+    }
+
+    printf ("\n%*s\n", sent->p - sent->pStart, "^");
 
     return NOMISTAKE;
 }
 
 static int  SkipTabs (sentence* sent)
 {
-    while ((parsSymb == '\n') || (parsSymb == '\t') || (parsSymb == ' '))
+    while ((parsSymb == '\n') || (parsSymb == '\t') || (parsSymb == ' ') || (parsSymb == '\r'))
+    {
+        if (parsSymb == '\n')
+        {
+           sent->line++;
+           sent->pStart = sent->p + 1;
+        }
+
         sent->p++;
+    }
     
     return 0;
 }

@@ -53,7 +53,14 @@ void DotElemCtor (void* index, typeNode type, structData data, void* next, void*
 
             break;
         
-        case STR:
+        case STRID:
+            fprintf (dotFile, "%d", data.STRID);
+            fprintf (dotFile, "\\\"|{<left>left:%10p|<right>right:%10p}}\", ", next, prev);
+            fprintf (dotFile, "fillcolor=\"%s\"", "aqua");
+
+            break;
+
+         case STR:
             fprintf (dotFile, "%s", data.STR);
             fprintf (dotFile, "\\\"|{<left>left:%10p|<right>right:%10p}}\", ", next, prev);
             fprintf (dotFile, "fillcolor=\"%s\"", "aqua");
