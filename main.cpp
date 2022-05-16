@@ -15,6 +15,7 @@ int main ()
     CTree t2 (t1);
     CTree t3 = t2;
 
+    TranslateToAsm (t3);
     t2.graphDump ();
 
     return 0;

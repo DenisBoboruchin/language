@@ -4,7 +4,7 @@ CFLAGS  = -c -Wall -Wextra -Werror -Walloc-zero -Walloca -Walloca-larger-than=81
             -Wformat-security -Wformat-signedness -Wformat=2 -Wformat-overflow=2 -Wformat-truncation=2 -Winline -Wlarger-than=8192      \
             -Wvla-larger-than=8192 -Wlogical-op -Wmissing-declarations -Wopenmp-simd -Wpacked -Wpointer-arith -Wredundant-decls         \
             -Wrestrict -Wshadow -Wstack-usage=8192 -Wstrict-overflow=2 -Wstringop-overflow=4 -Wsuggest-attribute=noreturn               \
-            -Wsuggest-final-types -Wswitch-default -Wswitch-enum -Wsync-nand -Wundef -Wunreachable-code -Wunused -Wvariadic-macros      \
+            -Wsuggest-final-types -Wswitch-default -Wsync-nand -Wundef -Wunreachable-code -Wvariadic-macros     		 				\
             -Wno-missing-field-initializers -Wnarrowing -Wvarargs -fcheck-new -fstrict-overflow -flto-odr-type-merging 	
 
 all: main.o translator.o parser.o tree.o graphviz.o
