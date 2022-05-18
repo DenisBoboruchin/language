@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <assert.h>
 #include <math.h>
+#include <sys/stat.h>
 
 #include "../include/tree.h"
 

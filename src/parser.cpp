@@ -20,8 +20,54 @@ static constr   CheckConstruction   (const char* word);
 static int      CheckLabel          (sentence* sent, char* word);
 static int      SkipTabs            (sentence* sent);
 
-item* GetGrammar (const char* str)
+/////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////
+
+static size_t GetSizeBuf(const char* origName)
 {
+    struct stat stbuf;
+
+    assert(origName != NULL);
+
+    stat(origName, &stbuf);
+
+    return stbuf.st_size;
+}
+
+static char* CreateBuf(size_t* sizeBuf, const char* origName)
+{
+    assert(sizeBuf != NULL);
+    assert(*sizeBuf > 0);
+
+    char* buffer = (char*)calloc(*sizeBuf + 1, sizeof(char));
+    assert(buffer != NULL);
+
+    FILE* text = fopen(origName, "r");
+    assert(text != NULL);
+
+    size_t newSize = fread(buffer, sizeof(*buffer), *sizeBuf, text);
+    assert(fclose(text) == 0);
+
+    if (newSize < *sizeBuf)
+    {
+        *sizeBuf = newSize;
+        buffer = (char*)realloc(buffer, *sizeBuf);
+    }
+
+    return buffer;
+}
+
+/////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////
+
+item* GetGrammar (const char* name)
+{
+    size_t sizeBuf = GetSizeBuf (name);
+    char* str = CreateBuf (&sizeBuf, name);
+
+
     sentence sent = {};
     sent.str = str;
     sent.p = 0;
@@ -524,3 +570,10 @@ static int  SkipTabs (sentence* sent)
     
     return 0;
 }
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+
