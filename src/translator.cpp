@@ -59,6 +59,8 @@ int WorkWithConstr (FILE* asmFile, item* node)
         case mif:
         {
             WorkWithOP (asmFile, node->left);
+            fprintf (asmFile, "PUSH 0\n");
+            fprintf (asmFile, "JE DENIF%p", node);
             break;
         }
 
