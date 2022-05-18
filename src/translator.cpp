@@ -38,14 +38,19 @@ int WorkWithOP (FILE* asmFile, item* node)
         case divv:
         case sub:       
         case add:
-            PrintAsmOP (asmFile, node, node->data.OP);
+            PrintAsmOP (asmFile, node);
+            break;
+        
+        case equ:
+            PrintAsmEqu (asmFile, node);
+            break;
+
+        case more:
+        case smaller:
+            PrintAsmComp (asmFile, node);
             break;
 
         case deg:
-        case more:
-        case smaller:
-        case equ:
-
         case def:
         default:
             assert (!"ERROR TRANSLATING!!!");
@@ -79,19 +84,23 @@ int WorkWithConstr (FILE* asmFile, item* node)
     return 0;
 }
 
-int PrintAsmOP (FILE* asmFile, item* node, operate op)
+int PrintAsmOP (FILE* asmFile, item* node)
 {
     if (node->left->type == STRID)
         fprintf (asmFile, "PUSH [%d]\n", node->left->data.STRID);
-    else
+    else if (node->left->type == INT)
         fprintf (asmFile, "PUSH %d\n", node->left->data.INT);
-    
+    else
+        WorkWithOP (asmFile, node->left);
+
     if (node->right->type == STRID)
         fprintf (asmFile, "PUSH [%d]\n", node->right->data.STRID);
-    else
+    else if (node->right->type == INT)
         fprintf (asmFile, "PUSH %d\n", node->right->data.INT);
+    else
+        WorkWithOP (asmFile, node->right);
 
-    switch (op)
+    switch (node->data.OP)
     {   
         case mul:
             fprintf (asmFile, "MUL\n");
@@ -118,6 +127,52 @@ int PrintAsmOP (FILE* asmFile, item* node, operate op)
     return 0;
 }
 
+int PrintAsmEqu (FILE* asmFile, item* node)
+{
+    if (node->right->type == STRID)
+        fprintf (asmFile, "PUSH [%d]\n", node->right->data.STRID);
+    else if (node->right->type == INT)
+        fprintf (asmFile, "PUSH %d\n", node->right->data.INT);
+    else
+        WorkWithOP (asmFile, node->right);    
+    
+    fprintf (asmFile, "POP  [%d]\n", node->left->data.STRID);
+    fprintf (asmFile, "PUSH 1\n\n");
+
+    return 0;
+}
+
+int PrintAsmComp (FILE* asmFile, item* node)
+{
+    fprintf (asmFile, "PUSH 1\n");
+    
+    if (node->left->type == STRID)
+        fprintf (asmFile, "PUSH [%d]\n", node->left->data.STRID);
+    else if (node->left->type == INT)
+        fprintf (asmFile, "PUSH %d\n", node->left->data.INT);
+    else
+        WorkWithOP (asmFile, node->left);
+
+    if (node->right->type == STRID)
+        fprintf (asmFile, "PUSH [%d]\n", node->right->data.STRID);
+    else if (node->right->type == INT)
+        fprintf (asmFile, "PUSH %d\n", node->right->data.INT);
+    else
+        WorkWithOP (asmFile, node->right);
+
+    fprintf (asmFile, "\nSUB\n\nPUSH 0\n");
+    fprintf (asmFile, "JB COMPARE%p\n", node);
+
+    if (node->data.OP == smaller)
+        fprintf (asmFile, "POP rdx\nPUSH 0\n");
+
+    fprintf (asmFile, "COMPARE%p\n", node);
+
+    if (node->data.OP == more)
+        fprintf (asmFile, "POP\nPUSH 0\n\n");
+ 
+    return 0;
+}
 
 //////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////

@@ -13,6 +13,7 @@ int         Translating     (FILE* asmFile, item* node);
 int         WorkWithOP      (FILE* asmFile, item* node);
 int         WorkWithConstr  (FILE* asmFile, item* node);
 
-int         PrintAsmOP      (FILE* asmFile, item* node, operate op);
-
+int         PrintAsmOP      (FILE* asmFile, item* node);
+int         PrintAsmEqu     (FILE* asmFile, item* node);
+int         PrintAsmComp    (FILE* asmFile, item* node);
 #endif

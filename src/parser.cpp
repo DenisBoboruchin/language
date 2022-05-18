@@ -185,7 +185,7 @@ static item* GetEqual (sentence* sent)
     item* temp = GetExpression (sent);                      //
 
     SkipTabs (sent);
-    if ((temp->type == ERR) || (temp->type == CONSTR))
+    if (temp->type != STRID)
     { 
         if (parsSymb == '=')
         {  
