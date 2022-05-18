@@ -1,0 +1,24 @@
+MIAY
+CALL innn
+PUSH 5
+PUSH 15
+CALL :add
+MIAY
+MIAY
+CALL innn
+HLT
+
+:add
+	ADD
+	OUT
+
+	MIAY
+	MIAY
+RET
+
+innn
+IN
+IN
+MUL 
+OUT
+RET
