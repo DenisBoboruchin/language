@@ -31,6 +31,7 @@ int WorkWithOP (FILE* asmFile, item* node)
     {
         case semicolon:
             Translating (asmFile, node->left);
+            Translating (asmFile, node->right);
             break;
        
         case mul:
@@ -86,9 +87,9 @@ int PrintAsmOP (FILE* asmFile, item* node, operate op)
         fprintf (asmFile, "PUSH %d\n", node->left->data.INT);
     
     if (node->right->type == STRID)
-        fprintf (asmFile, "PUSH [%d]\n", node->left->data.STRID);
+        fprintf (asmFile, "PUSH [%d]\n", node->right->data.STRID);
     else
-        fprintf (asmFile, "PUSH %d\n", node->left->data.INT);
+        fprintf (asmFile, "PUSH %d\n", node->right->data.INT);
 
     switch (op)
     {   

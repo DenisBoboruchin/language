@@ -11,7 +11,7 @@ IN the function: int StackCtor(Stack*)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
@@ -21,7 +21,7 @@ stack[0x7fffe9eef640]
 	size:     0;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
 		 [000] = -1;
@@ -49,7 +49,7 @@ IN the function: int StackCtor(Stack*)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef610]
+stack[0x7fffd4ed2550]
 {
 	left  canary for stack: C0FFEE1;
 
@@ -59,7 +59,7 @@ stack[0x7fffe9eef610]
 	size:     0;
 	capacity: 8;
 
-	data[0x7fffe2c54678]
+	data[0x7fffcc6a37d8]
 	{
 		 left  canary for data: DEDBAD1;
 		 [000] = -1;
@@ -87,7 +87,7 @@ IN the function: int StackPush(Stack*, elem_type)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
@@ -97,7 +97,7 @@ stack[0x7fffe9eef640]
 	size:     0;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
 		 [000] = -1;
@@ -125,7 +125,7 @@ IN the function: int CheckSize(Stack*)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
@@ -135,7 +135,7 @@ stack[0x7fffe9eef640]
 	size:     0;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
 		 [000] = -1;
@@ -163,7 +163,7 @@ IN the function: int CheckSize(Stack*)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
@@ -173,7 +173,7 @@ stack[0x7fffe9eef640]
 	size:     1;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
 		*[000] = 4;
@@ -201,7 +201,7 @@ IN the function: int StackPush(Stack*, elem_type)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
@@ -211,7 +211,7 @@ stack[0x7fffe9eef640]
 	size:     1;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
 		*[000] = 4;
@@ -239,7 +239,7 @@ IN the function: int StackPush(Stack*, elem_type)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
@@ -249,7 +249,7 @@ stack[0x7fffe9eef640]
 	size:     1;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
 		*[000] = 4;
@@ -277,7 +277,7 @@ IN the function: int CheckSize(Stack*)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
@@ -287,7 +287,7 @@ stack[0x7fffe9eef640]
 	size:     1;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
 		*[000] = 4;
@@ -315,21 +315,21 @@ IN the function: int CheckSize(Stack*)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
-	data  hash: 12E;
+	data  hash: 109;
 	stack hash: 1A6;
 
 	size:     2;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
 		*[000] = 4;
-		*[001] = 4;
+		*[001] = 3;
 		 [002] = -1;
 		 [003] = -1;
 		 [004] = -1;
@@ -353,21 +353,21 @@ IN the function: int StackPush(Stack*, elem_type)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
-	data  hash: 12E;
+	data  hash: 109;
 	stack hash: 1A6;
 
 	size:     2;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
 		*[000] = 4;
-		*[001] = 4;
+		*[001] = 3;
 		 [002] = -1;
 		 [003] = -1;
 		 [004] = -1;
@@ -391,21 +391,21 @@ IN the function: elem_type StackPop(Stack*)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
-	data  hash: 12E;
+	data  hash: 109;
 	stack hash: 1A6;
 
 	size:     2;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
 		*[000] = 4;
-		*[001] = 4;
+		*[001] = 3;
 		 [002] = -1;
 		 [003] = -1;
 		 [004] = -1;
@@ -429,21 +429,21 @@ IN the function: int CheckSize(Stack*)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
-	data  hash: 12E;
+	data  hash: 109;
 	stack hash: 1A6;
 
 	size:     2;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
 		*[000] = 4;
-		*[001] = 4;
+		*[001] = 3;
 		 [002] = -1;
 		 [003] = -1;
 		 [004] = -1;
@@ -467,7 +467,7 @@ IN the function: int CheckSize(Stack*)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
@@ -477,7 +477,7 @@ stack[0x7fffe9eef640]
 	size:     1;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
 		*[000] = 4;
@@ -505,7 +505,7 @@ IN the function: elem_type StackPop(Stack*)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
@@ -515,7 +515,7 @@ stack[0x7fffe9eef640]
 	size:     1;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
 		*[000] = 4;
@@ -543,7 +543,7 @@ IN the function: elem_type StackPop(Stack*)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
@@ -553,7 +553,7 @@ stack[0x7fffe9eef640]
 	size:     1;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
 		*[000] = 4;
@@ -581,7 +581,7 @@ IN the function: int CheckSize(Stack*)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
@@ -591,7 +591,7 @@ stack[0x7fffe9eef640]
 	size:     1;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
 		*[000] = 4;
@@ -619,7 +619,7 @@ IN the function: int CheckSize(Stack*)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
@@ -629,7 +629,7 @@ stack[0x7fffe9eef640]
 	size:     0;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
 		 [000] = -1;
@@ -657,7 +657,7 @@ IN the function: elem_type StackPop(Stack*)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
@@ -667,7 +667,7 @@ stack[0x7fffe9eef640]
 	size:     0;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
 		 [000] = -1;
@@ -695,7 +695,7 @@ IN the function: int StackPush(Stack*, elem_type)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
@@ -705,7 +705,7 @@ stack[0x7fffe9eef640]
 	size:     0;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
 		 [000] = -1;
@@ -733,7 +733,7 @@ IN the function: int CheckSize(Stack*)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
@@ -743,7 +743,7 @@ stack[0x7fffe9eef640]
 	size:     0;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
 		 [000] = -1;
@@ -771,20 +771,20 @@ IN the function: int CheckSize(Stack*)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
-	data  hash: 128;
+	data  hash: 103;
 	stack hash: 17D;
 
 	size:     1;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
-		*[000] = 8;
+		*[000] = 7;
 		 [001] = -1;
 		 [002] = -1;
 		 [003] = -1;
@@ -809,20 +809,20 @@ IN the function: int StackPush(Stack*, elem_type)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
-	data  hash: 128;
+	data  hash: 103;
 	stack hash: 17D;
 
 	size:     1;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
-		*[000] = 8;
+		*[000] = 7;
 		 [001] = -1;
 		 [002] = -1;
 		 [003] = -1;
@@ -847,20 +847,20 @@ IN the function: int StackPush(Stack*, elem_type)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
-	data  hash: 128;
+	data  hash: 103;
 	stack hash: 17D;
 
 	size:     1;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
-		*[000] = 8;
+		*[000] = 7;
 		 [001] = -1;
 		 [002] = -1;
 		 [003] = -1;
@@ -885,20 +885,20 @@ IN the function: int CheckSize(Stack*)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
-	data  hash: 128;
+	data  hash: 103;
 	stack hash: 17D;
 
 	size:     1;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
-		*[000] = 8;
+		*[000] = 7;
 		 [001] = -1;
 		 [002] = -1;
 		 [003] = -1;
@@ -923,20 +923,20 @@ IN the function: int CheckSize(Stack*)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
-	data  hash: 12E;
+	data  hash: 109;
 	stack hash: 1A6;
 
 	size:     2;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
-		*[000] = 8;
+		*[000] = 7;
 		*[001] = 0;
 		 [002] = -1;
 		 [003] = -1;
@@ -961,20 +961,20 @@ IN the function: int StackPush(Stack*, elem_type)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
-	data  hash: 12E;
+	data  hash: 109;
 	stack hash: 1A6;
 
 	size:     2;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
-		*[000] = 8;
+		*[000] = 7;
 		*[001] = 0;
 		 [002] = -1;
 		 [003] = -1;
@@ -999,20 +999,20 @@ IN the function: elem_type StackPop(Stack*)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
-	data  hash: 12E;
+	data  hash: 109;
 	stack hash: 1A6;
 
 	size:     2;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
-		*[000] = 8;
+		*[000] = 7;
 		*[001] = 0;
 		 [002] = -1;
 		 [003] = -1;
@@ -1037,20 +1037,20 @@ IN the function: int CheckSize(Stack*)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
-	data  hash: 12E;
+	data  hash: 109;
 	stack hash: 1A6;
 
 	size:     2;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
-		*[000] = 8;
+		*[000] = 7;
 		*[001] = 0;
 		 [002] = -1;
 		 [003] = -1;
@@ -1075,20 +1075,20 @@ IN the function: int CheckSize(Stack*)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
-	data  hash: 128;
+	data  hash: 103;
 	stack hash: 17D;
 
 	size:     1;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
-		*[000] = 8;
+		*[000] = 7;
 		 [001] = -1;
 		 [002] = -1;
 		 [003] = -1;
@@ -1113,20 +1113,20 @@ IN the function: elem_type StackPop(Stack*)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
-	data  hash: 128;
+	data  hash: 103;
 	stack hash: 17D;
 
 	size:     1;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
-		*[000] = 8;
+		*[000] = 7;
 		 [001] = -1;
 		 [002] = -1;
 		 [003] = -1;
@@ -1151,20 +1151,20 @@ IN the function: elem_type StackPop(Stack*)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
-	data  hash: 128;
+	data  hash: 103;
 	stack hash: 17D;
 
 	size:     1;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
-		*[000] = 8;
+		*[000] = 7;
 		 [001] = -1;
 		 [002] = -1;
 		 [003] = -1;
@@ -1189,20 +1189,20 @@ IN the function: int CheckSize(Stack*)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
-	data  hash: 128;
+	data  hash: 103;
 	stack hash: 17D;
 
 	size:     1;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
-		*[000] = 8;
+		*[000] = 7;
 		 [001] = -1;
 		 [002] = -1;
 		 [003] = -1;
@@ -1227,7 +1227,7 @@ IN the function: int CheckSize(Stack*)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
@@ -1237,7 +1237,7 @@ stack[0x7fffe9eef640]
 	size:     0;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
 		 [000] = -1;
@@ -1265,7 +1265,7 @@ IN the function: elem_type StackPop(Stack*)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
@@ -1275,7 +1275,7 @@ stack[0x7fffe9eef640]
 	size:     0;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
 		 [000] = -1;
@@ -1303,7 +1303,7 @@ IN the function: int StackPush(Stack*, elem_type)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
@@ -1313,7 +1313,7 @@ stack[0x7fffe9eef640]
 	size:     0;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
 		 [000] = -1;
@@ -1341,7 +1341,7 @@ IN the function: int CheckSize(Stack*)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
@@ -1351,7 +1351,7 @@ stack[0x7fffe9eef640]
 	size:     0;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
 		 [000] = -1;
@@ -1379,7 +1379,615 @@ IN the function: int CheckSize(Stack*)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
+{
+	left  canary for stack: C0FFEE1;
+
+	data  hash: 4A;
+	stack hash: 17D;
+
+	size:     1;
+	capacity: 8;
+
+	data[0x7fffcc691768]
+	{
+		 left  canary for data: DEDBAD1;
+		*[000] = 2;
+		 [001] = -1;
+		 [002] = -1;
+		 [003] = -1;
+		 [004] = -1;
+		 [005] = -1;
+		 [006] = -1;
+		 [007] = -1;
+		 right canary for data: DEDBAD2;
+	}
+
+	right canary for stack: C0FFEE2;
+}
+
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+
+IN the program: CPU/MyStack.cpp
+IN the line: 51
+IN the function: int StackPush(Stack*, elem_type)
+STATUS: stack Ok!
+
+
+stack[0x7fffd4ed2580]
+{
+	left  canary for stack: C0FFEE1;
+
+	data  hash: 4A;
+	stack hash: 17D;
+
+	size:     1;
+	capacity: 8;
+
+	data[0x7fffcc691768]
+	{
+		 left  canary for data: DEDBAD1;
+		*[000] = 2;
+		 [001] = -1;
+		 [002] = -1;
+		 [003] = -1;
+		 [004] = -1;
+		 [005] = -1;
+		 [006] = -1;
+		 [007] = -1;
+		 right canary for data: DEDBAD2;
+	}
+
+	right canary for stack: C0FFEE2;
+}
+
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+
+IN the program: CPU/MyStack.cpp
+IN the line: 38
+IN the function: int StackPush(Stack*, elem_type)
+STATUS: stack Ok!
+
+
+stack[0x7fffd4ed2580]
+{
+	left  canary for stack: C0FFEE1;
+
+	data  hash: 4A;
+	stack hash: 17D;
+
+	size:     1;
+	capacity: 8;
+
+	data[0x7fffcc691768]
+	{
+		 left  canary for data: DEDBAD1;
+		*[000] = 2;
+		 [001] = -1;
+		 [002] = -1;
+		 [003] = -1;
+		 [004] = -1;
+		 [005] = -1;
+		 [006] = -1;
+		 [007] = -1;
+		 right canary for data: DEDBAD2;
+	}
+
+	right canary for stack: C0FFEE2;
+}
+
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+
+IN the program: CPU/MyStack.cpp
+IN the line: 83
+IN the function: int CheckSize(Stack*)
+STATUS: stack Ok!
+
+
+stack[0x7fffd4ed2580]
+{
+	left  canary for stack: C0FFEE1;
+
+	data  hash: 4A;
+	stack hash: 17D;
+
+	size:     1;
+	capacity: 8;
+
+	data[0x7fffcc691768]
+	{
+		 left  canary for data: DEDBAD1;
+		*[000] = 2;
+		 [001] = -1;
+		 [002] = -1;
+		 [003] = -1;
+		 [004] = -1;
+		 [005] = -1;
+		 [006] = -1;
+		 [007] = -1;
+		 right canary for data: DEDBAD2;
+	}
+
+	right canary for stack: C0FFEE2;
+}
+
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+
+IN the program: CPU/MyStack.cpp
+IN the line: 83
+IN the function: int CheckSize(Stack*)
+STATUS: stack Ok!
+
+
+stack[0x7fffd4ed2580]
+{
+	left  canary for stack: C0FFEE1;
+
+	data  hash: 9A;
+	stack hash: 1A6;
+
+	size:     2;
+	capacity: 8;
+
+	data[0x7fffcc691768]
+	{
+		 left  canary for data: DEDBAD1;
+		*[000] = 2;
+		*[001] = 2;
+		 [002] = -1;
+		 [003] = -1;
+		 [004] = -1;
+		 [005] = -1;
+		 [006] = -1;
+		 [007] = -1;
+		 right canary for data: DEDBAD2;
+	}
+
+	right canary for stack: C0FFEE2;
+}
+
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+
+IN the program: CPU/MyStack.cpp
+IN the line: 51
+IN the function: int StackPush(Stack*, elem_type)
+STATUS: stack Ok!
+
+
+stack[0x7fffd4ed2580]
+{
+	left  canary for stack: C0FFEE1;
+
+	data  hash: 9A;
+	stack hash: 1A6;
+
+	size:     2;
+	capacity: 8;
+
+	data[0x7fffcc691768]
+	{
+		 left  canary for data: DEDBAD1;
+		*[000] = 2;
+		*[001] = 2;
+		 [002] = -1;
+		 [003] = -1;
+		 [004] = -1;
+		 [005] = -1;
+		 [006] = -1;
+		 [007] = -1;
+		 right canary for data: DEDBAD2;
+	}
+
+	right canary for stack: C0FFEE2;
+}
+
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+
+IN the program: CPU/MyStack.cpp
+IN the line: 56
+IN the function: elem_type StackPop(Stack*)
+STATUS: stack Ok!
+
+
+stack[0x7fffd4ed2580]
+{
+	left  canary for stack: C0FFEE1;
+
+	data  hash: 9A;
+	stack hash: 1A6;
+
+	size:     2;
+	capacity: 8;
+
+	data[0x7fffcc691768]
+	{
+		 left  canary for data: DEDBAD1;
+		*[000] = 2;
+		*[001] = 2;
+		 [002] = -1;
+		 [003] = -1;
+		 [004] = -1;
+		 [005] = -1;
+		 [006] = -1;
+		 [007] = -1;
+		 right canary for data: DEDBAD2;
+	}
+
+	right canary for stack: C0FFEE2;
+}
+
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+
+IN the program: CPU/MyStack.cpp
+IN the line: 83
+IN the function: int CheckSize(Stack*)
+STATUS: stack Ok!
+
+
+stack[0x7fffd4ed2580]
+{
+	left  canary for stack: C0FFEE1;
+
+	data  hash: 9A;
+	stack hash: 1A6;
+
+	size:     2;
+	capacity: 8;
+
+	data[0x7fffcc691768]
+	{
+		 left  canary for data: DEDBAD1;
+		*[000] = 2;
+		*[001] = 2;
+		 [002] = -1;
+		 [003] = -1;
+		 [004] = -1;
+		 [005] = -1;
+		 [006] = -1;
+		 [007] = -1;
+		 right canary for data: DEDBAD2;
+	}
+
+	right canary for stack: C0FFEE2;
+}
+
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+
+IN the program: CPU/MyStack.cpp
+IN the line: 83
+IN the function: int CheckSize(Stack*)
+STATUS: stack Ok!
+
+
+stack[0x7fffd4ed2580]
+{
+	left  canary for stack: C0FFEE1;
+
+	data  hash: 4A;
+	stack hash: 17D;
+
+	size:     1;
+	capacity: 8;
+
+	data[0x7fffcc691768]
+	{
+		 left  canary for data: DEDBAD1;
+		*[000] = 2;
+		 [001] = -1;
+		 [002] = -1;
+		 [003] = -1;
+		 [004] = -1;
+		 [005] = -1;
+		 [006] = -1;
+		 [007] = -1;
+		 right canary for data: DEDBAD2;
+	}
+
+	right canary for stack: C0FFEE2;
+}
+
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+
+IN the program: CPU/MyStack.cpp
+IN the line: 70
+IN the function: elem_type StackPop(Stack*)
+STATUS: stack Ok!
+
+
+stack[0x7fffd4ed2580]
+{
+	left  canary for stack: C0FFEE1;
+
+	data  hash: 4A;
+	stack hash: 17D;
+
+	size:     1;
+	capacity: 8;
+
+	data[0x7fffcc691768]
+	{
+		 left  canary for data: DEDBAD1;
+		*[000] = 2;
+		 [001] = -1;
+		 [002] = -1;
+		 [003] = -1;
+		 [004] = -1;
+		 [005] = -1;
+		 [006] = -1;
+		 [007] = -1;
+		 right canary for data: DEDBAD2;
+	}
+
+	right canary for stack: C0FFEE2;
+}
+
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+
+IN the program: CPU/MyStack.cpp
+IN the line: 56
+IN the function: elem_type StackPop(Stack*)
+STATUS: stack Ok!
+
+
+stack[0x7fffd4ed2580]
+{
+	left  canary for stack: C0FFEE1;
+
+	data  hash: 4A;
+	stack hash: 17D;
+
+	size:     1;
+	capacity: 8;
+
+	data[0x7fffcc691768]
+	{
+		 left  canary for data: DEDBAD1;
+		*[000] = 2;
+		 [001] = -1;
+		 [002] = -1;
+		 [003] = -1;
+		 [004] = -1;
+		 [005] = -1;
+		 [006] = -1;
+		 [007] = -1;
+		 right canary for data: DEDBAD2;
+	}
+
+	right canary for stack: C0FFEE2;
+}
+
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+
+IN the program: CPU/MyStack.cpp
+IN the line: 83
+IN the function: int CheckSize(Stack*)
+STATUS: stack Ok!
+
+
+stack[0x7fffd4ed2580]
+{
+	left  canary for stack: C0FFEE1;
+
+	data  hash: 4A;
+	stack hash: 17D;
+
+	size:     1;
+	capacity: 8;
+
+	data[0x7fffcc691768]
+	{
+		 left  canary for data: DEDBAD1;
+		*[000] = 2;
+		 [001] = -1;
+		 [002] = -1;
+		 [003] = -1;
+		 [004] = -1;
+		 [005] = -1;
+		 [006] = -1;
+		 [007] = -1;
+		 right canary for data: DEDBAD2;
+	}
+
+	right canary for stack: C0FFEE2;
+}
+
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+
+IN the program: CPU/MyStack.cpp
+IN the line: 83
+IN the function: int CheckSize(Stack*)
+STATUS: stack Ok!
+
+
+stack[0x7fffd4ed2580]
+{
+	left  canary for stack: C0FFEE1;
+
+	data  hash: 0;
+	stack hash: 154;
+
+	size:     0;
+	capacity: 8;
+
+	data[0x7fffcc691768]
+	{
+		 left  canary for data: DEDBAD1;
+		 [000] = -1;
+		 [001] = -1;
+		 [002] = -1;
+		 [003] = -1;
+		 [004] = -1;
+		 [005] = -1;
+		 [006] = -1;
+		 [007] = -1;
+		 right canary for data: DEDBAD2;
+	}
+
+	right canary for stack: C0FFEE2;
+}
+
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+
+IN the program: CPU/MyStack.cpp
+IN the line: 70
+IN the function: elem_type StackPop(Stack*)
+STATUS: stack Ok!
+
+
+stack[0x7fffd4ed2580]
+{
+	left  canary for stack: C0FFEE1;
+
+	data  hash: 0;
+	stack hash: 154;
+
+	size:     0;
+	capacity: 8;
+
+	data[0x7fffcc691768]
+	{
+		 left  canary for data: DEDBAD1;
+		 [000] = -1;
+		 [001] = -1;
+		 [002] = -1;
+		 [003] = -1;
+		 [004] = -1;
+		 [005] = -1;
+		 [006] = -1;
+		 [007] = -1;
+		 right canary for data: DEDBAD2;
+	}
+
+	right canary for stack: C0FFEE2;
+}
+
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+
+IN the program: CPU/MyStack.cpp
+IN the line: 38
+IN the function: int StackPush(Stack*, elem_type)
+STATUS: stack Ok!
+
+
+stack[0x7fffd4ed2580]
+{
+	left  canary for stack: C0FFEE1;
+
+	data  hash: 0;
+	stack hash: 154;
+
+	size:     0;
+	capacity: 8;
+
+	data[0x7fffcc691768]
+	{
+		 left  canary for data: DEDBAD1;
+		 [000] = -1;
+		 [001] = -1;
+		 [002] = -1;
+		 [003] = -1;
+		 [004] = -1;
+		 [005] = -1;
+		 [006] = -1;
+		 [007] = -1;
+		 right canary for data: DEDBAD2;
+	}
+
+	right canary for stack: C0FFEE2;
+}
+
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+
+IN the program: CPU/MyStack.cpp
+IN the line: 83
+IN the function: int CheckSize(Stack*)
+STATUS: stack Ok!
+
+
+stack[0x7fffd4ed2580]
+{
+	left  canary for stack: C0FFEE1;
+
+	data  hash: 0;
+	stack hash: 154;
+
+	size:     0;
+	capacity: 8;
+
+	data[0x7fffcc691768]
+	{
+		 left  canary for data: DEDBAD1;
+		 [000] = -1;
+		 [001] = -1;
+		 [002] = -1;
+		 [003] = -1;
+		 [004] = -1;
+		 [005] = -1;
+		 [006] = -1;
+		 [007] = -1;
+		 right canary for data: DEDBAD2;
+	}
+
+	right canary for stack: C0FFEE2;
+}
+
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+
+IN the program: CPU/MyStack.cpp
+IN the line: 83
+IN the function: int CheckSize(Stack*)
+STATUS: stack Ok!
+
+
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
@@ -1389,7 +1997,7 @@ stack[0x7fffe9eef640]
 	size:     1;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
 		*[000] = 0;
@@ -1417,7 +2025,7 @@ IN the function: int StackPush(Stack*, elem_type)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
@@ -1427,7 +2035,7 @@ stack[0x7fffe9eef640]
 	size:     1;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
 		*[000] = 0;
@@ -1455,7 +2063,7 @@ IN the function: int StackPush(Stack*, elem_type)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
@@ -1465,7 +2073,7 @@ stack[0x7fffe9eef640]
 	size:     1;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
 		*[000] = 0;
@@ -1493,7 +2101,7 @@ IN the function: int CheckSize(Stack*)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
@@ -1503,7 +2111,7 @@ stack[0x7fffe9eef640]
 	size:     1;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
 		*[000] = 0;
@@ -1531,7 +2139,7 @@ IN the function: int CheckSize(Stack*)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
@@ -1541,7 +2149,7 @@ stack[0x7fffe9eef640]
 	size:     2;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
 		*[000] = 0;
@@ -1569,7 +2177,7 @@ IN the function: int StackPush(Stack*, elem_type)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
@@ -1579,7 +2187,7 @@ stack[0x7fffe9eef640]
 	size:     2;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
 		*[000] = 0;
@@ -1607,7 +2215,7 @@ IN the function: elem_type StackPop(Stack*)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
@@ -1617,7 +2225,7 @@ stack[0x7fffe9eef640]
 	size:     2;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
 		*[000] = 0;
@@ -1645,7 +2253,7 @@ IN the function: int CheckSize(Stack*)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
@@ -1655,7 +2263,7 @@ stack[0x7fffe9eef640]
 	size:     2;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
 		*[000] = 0;
@@ -1683,7 +2291,7 @@ IN the function: int CheckSize(Stack*)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
@@ -1693,7 +2301,7 @@ stack[0x7fffe9eef640]
 	size:     1;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
 		*[000] = 0;
@@ -1721,7 +2329,7 @@ IN the function: elem_type StackPop(Stack*)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
@@ -1731,7 +2339,7 @@ stack[0x7fffe9eef640]
 	size:     1;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
 		*[000] = 0;
@@ -1759,7 +2367,7 @@ IN the function: elem_type StackPop(Stack*)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
@@ -1769,7 +2377,7 @@ stack[0x7fffe9eef640]
 	size:     1;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
 		*[000] = 0;
@@ -1797,7 +2405,7 @@ IN the function: int CheckSize(Stack*)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
@@ -1807,7 +2415,7 @@ stack[0x7fffe9eef640]
 	size:     1;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
 		*[000] = 0;
@@ -1835,7 +2443,7 @@ IN the function: int CheckSize(Stack*)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
@@ -1845,7 +2453,7 @@ stack[0x7fffe9eef640]
 	size:     0;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
 		 [000] = -1;
@@ -1873,7 +2481,7 @@ IN the function: elem_type StackPop(Stack*)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
@@ -1883,162 +2491,10 @@ stack[0x7fffe9eef640]
 	size:     0;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
 		 [000] = -1;
-		 [001] = -1;
-		 [002] = -1;
-		 [003] = -1;
-		 [004] = -1;
-		 [005] = -1;
-		 [006] = -1;
-		 [007] = -1;
-		 right canary for data: DEDBAD2;
-	}
-
-	right canary for stack: C0FFEE2;
-}
-
------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------
-
-IN the program: CPU/MyStack.cpp
-IN the line: 38
-IN the function: int StackPush(Stack*, elem_type)
-STATUS: stack Ok!
-
-
-stack[0x7fffe9eef640]
-{
-	left  canary for stack: C0FFEE1;
-
-	data  hash: 0;
-	stack hash: 154;
-
-	size:     0;
-	capacity: 8;
-
-	data[0x7fffe2c42608]
-	{
-		 left  canary for data: DEDBAD1;
-		 [000] = -1;
-		 [001] = -1;
-		 [002] = -1;
-		 [003] = -1;
-		 [004] = -1;
-		 [005] = -1;
-		 [006] = -1;
-		 [007] = -1;
-		 right canary for data: DEDBAD2;
-	}
-
-	right canary for stack: C0FFEE2;
-}
-
------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------
-
-IN the program: CPU/MyStack.cpp
-IN the line: 83
-IN the function: int CheckSize(Stack*)
-STATUS: stack Ok!
-
-
-stack[0x7fffe9eef640]
-{
-	left  canary for stack: C0FFEE1;
-
-	data  hash: 0;
-	stack hash: 154;
-
-	size:     0;
-	capacity: 8;
-
-	data[0x7fffe2c42608]
-	{
-		 left  canary for data: DEDBAD1;
-		 [000] = -1;
-		 [001] = -1;
-		 [002] = -1;
-		 [003] = -1;
-		 [004] = -1;
-		 [005] = -1;
-		 [006] = -1;
-		 [007] = -1;
-		 right canary for data: DEDBAD2;
-	}
-
-	right canary for stack: C0FFEE2;
-}
-
------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------
-
-IN the program: CPU/MyStack.cpp
-IN the line: 83
-IN the function: int CheckSize(Stack*)
-STATUS: stack Ok!
-
-
-stack[0x7fffe9eef640]
-{
-	left  canary for stack: C0FFEE1;
-
-	data  hash: 0;
-	stack hash: 17D;
-
-	size:     1;
-	capacity: 8;
-
-	data[0x7fffe2c42608]
-	{
-		 left  canary for data: DEDBAD1;
-		*[000] = 0;
-		 [001] = -1;
-		 [002] = -1;
-		 [003] = -1;
-		 [004] = -1;
-		 [005] = -1;
-		 [006] = -1;
-		 [007] = -1;
-		 right canary for data: DEDBAD2;
-	}
-
-	right canary for stack: C0FFEE2;
-}
-
------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------
-
-IN the program: CPU/MyStack.cpp
-IN the line: 51
-IN the function: int StackPush(Stack*, elem_type)
-STATUS: stack Ok!
-
-
-stack[0x7fffe9eef640]
-{
-	left  canary for stack: C0FFEE1;
-
-	data  hash: 0;
-	stack hash: 17D;
-
-	size:     1;
-	capacity: 8;
-
-	data[0x7fffe2c42608]
-	{
-		 left  canary for data: DEDBAD1;
-		*[000] = 0;
 		 [001] = -1;
 		 [002] = -1;
 		 [003] = -1;
@@ -2063,7 +2519,7 @@ IN the function: int StackDtor(Stack*)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef610]
+stack[0x7fffd4ed2550]
 {
 	left  canary for stack: C0FFEE1;
 
@@ -2073,7 +2529,7 @@ stack[0x7fffe9eef610]
 	size:     0;
 	capacity: 8;
 
-	data[0x7fffe2c54678]
+	data[0x7fffcc6a37d8]
 	{
 		 left  canary for data: DEDBAD1;
 		 [000] = -1;
@@ -2101,20 +2557,20 @@ IN the function: int StackDtor(Stack*)
 STATUS: stack Ok!
 
 
-stack[0x7fffe9eef640]
+stack[0x7fffd4ed2580]
 {
 	left  canary for stack: C0FFEE1;
 
 	data  hash: 0;
-	stack hash: 17D;
+	stack hash: 154;
 
-	size:     1;
+	size:     0;
 	capacity: 8;
 
-	data[0x7fffe2c42608]
+	data[0x7fffcc691768]
 	{
 		 left  canary for data: DEDBAD1;
-		*[000] = 0;
+		 [000] = -1;
 		 [001] = -1;
 		 [002] = -1;
 		 [003] = -1;
