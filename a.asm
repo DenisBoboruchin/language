@@ -3,4 +3,12 @@ PUSH 4
 ADD
 
 PUSH 0
-JE DENIF0x7fffe0408cc0
+JE DENIF0x7fffe93accd0
+
+PUSH [0]
+PUSH 0
+ADD
+
+
+DENIF0x7fffe93accd0
+

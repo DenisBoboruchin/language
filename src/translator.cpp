@@ -60,7 +60,9 @@ int WorkWithConstr (FILE* asmFile, item* node)
         {
             WorkWithOP (asmFile, node->left);
             fprintf (asmFile, "PUSH 0\n");
-            fprintf (asmFile, "JE DENIF%p", node);
+            fprintf (asmFile, "JE DENIF%p\n\n", node);
+            Translating (asmFile, node->right);
+            fprintf (asmFile, "\nDENIF%p\n\n", node);
             break;
         }
 
