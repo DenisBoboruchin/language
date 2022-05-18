@@ -34,8 +34,8 @@ int WorkWithOP (FILE* asmFile, item* node)
        
         case mul:
         case divv:
-        case add:       
-        case sub:
+        case sub:       
+        case add:
             PrintAsmOP (asmFile, node, node->data.OP);
             break;
 
@@ -58,7 +58,7 @@ int WorkWithConstr (FILE* asmFile, item* node)
     {
         case mif:
         {
-            
+            WorkWithOP (asmFile, node->left);
             break;
         }
 
@@ -90,12 +90,15 @@ int PrintAsmOP (FILE* asmFile, item* node, operate op)
         case mul:
             fprintf (asmFile, "MUL\n");
             break;
+
         case divv:
             fprintf (asmFile, "DIV\n");
             break;
+
         case add:       
             fprintf (asmFile, "ADD\n");
             break;
+
         case sub:
             fprintf (asmFile, "SUB\n");
             break;
@@ -103,6 +106,8 @@ int PrintAsmOP (FILE* asmFile, item* node, operate op)
         default:
             assert (!"ERROR TRANSLATING!!!");
     }
+
+    fprintf (asmFile, "\n");
 
     return 0;
 }
