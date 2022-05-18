@@ -49,4 +49,4 @@ sort.o: CPU/SortText.cpp
 
 
 clean:
-	rm -rf *.out *.o main
+	rm -rf *.out *.o execute/a.asm execute/binCode.bin main start

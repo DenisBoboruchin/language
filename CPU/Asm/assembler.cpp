@@ -35,7 +35,7 @@
         continue;                                                                                       \
     }
 
-static const char* BINCODE = "binCode.bin";
+static const char* BINCODE = "execute/binCode.bin";
 
 char* Assembler(const char* CMD)
 {

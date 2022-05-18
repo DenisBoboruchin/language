@@ -30,7 +30,7 @@ struct Stack
 
 const int STARTSTACKCAPACITY = 8;
 
-static FILE* logFile = fopen("logFile.txt", "w");
+static FILE* logFile = fopen("dump/logFile.txt", "w");
 
 enum ERRORS
 {

@@ -2,12 +2,13 @@
 
 int TranslateToAsm (CTree tree)
 {
-    FILE* asmFile = fopen ("a.asm", "w+");
+    FILE* asmFile = fopen ("execute/a.asm", "w+");
 
     item* root = tree.root();
 
     int error = Translating (asmFile, root);
 
+    fprintf (asmFile, "\nHLT\n");
     fclose (asmFile);
     
     return error;

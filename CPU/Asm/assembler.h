@@ -8,7 +8,7 @@
 #include "../SortText.h"
 #include "../enum.h"
 
-static FILE* logAsm = fopen("logAsm.txt", "w");
+static FILE* logAsm = fopen("dump/logAsm.txt", "w");
 
 const int   ERRORCMD    = -17;
 const int   MISTAKE     =   1;
