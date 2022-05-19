@@ -304,6 +304,8 @@ static item* GetExpression (sentence* sent)
 
         node->left = nodeLeft;
         node->right = nodeRight;
+
+        nodeLeft = node;
     }
 
     return node;

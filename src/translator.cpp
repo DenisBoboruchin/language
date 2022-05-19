@@ -32,6 +32,7 @@ int WorkWithOP (FILE* asmFile, item* node)
         case semicolon:
             Translating (asmFile, node->left);
             Translating (asmFile, node->right);
+            fprintf (asmFile, "\n\n\n");
             break;
        
         case mul:
