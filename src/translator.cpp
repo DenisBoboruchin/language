@@ -176,7 +176,7 @@ int PrintAsmComp (FILE* asmFile, item* node)
     fprintf (asmFile, "COMPARE%p\n", node);
 
     if (node->data.OP == more)
-        fprintf (asmFile, "POP\nPUSH 0\n\n");
+        fprintf (asmFile, "POP rdx\nPUSH 0\n\n");
  
     return 0;
 }

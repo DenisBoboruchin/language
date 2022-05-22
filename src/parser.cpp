@@ -551,7 +551,7 @@ static constr CheckConstruction (const char* word)
     else if (!strcmp (word, "while"))
         return mwhile;
 
-    else if (!strcmp (word, "printf"))
+    else if (!strcmp (word, "output"))
         return mprintf;
 
     return str;

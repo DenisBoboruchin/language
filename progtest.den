@@ -2,9 +2,13 @@ if (4 + 3)
 {
     x = 4;
     y = x + 5;
-    printf x;
-    printf y;
-    y = y - x;
-    printf x;    
-    printf y;
+    output x;
+    output y;
+    y = y - x * x;
+    output x;
+    
+    if (3 > 2)
+    {    
+        output y;
+    };
 };$
