@@ -130,7 +130,7 @@ static item* GetStr (sentence* sent)
     return node;
 }
 
-static item* GetIf (sentence* sent)
+static item* GetIf (sentence* sent)     ///////////////////and printf!!!!!!
 {   
     SkipTabs (sent);
 
@@ -139,16 +139,30 @@ static item* GetIf (sentence* sent)
 
     item* node = GetWord (sent);
 
-    if (node->data.CONSTR != mif)
+    if ((node->data.CONSTR != mif) && (node->data.CONSTR != mprintf))
     {
         sent->p = temp;
         delete[] node;
         return GetEqual (sent);
     }
 
-    node->left = GetPrimaryComparison (sent);            // can't =
+    if (node->data.CONSTR == mprintf)
+    {
+        node->left = GetWord (sent);
 
-    node->right = GetPrimaryBody (sent);                             // primary mb...
+        if (node->left->type != STRID)
+        {
+            PrintError (sent);
+            assert (!"SyntaxError, expected 'variable'");
+        }
+    }
+
+    else
+    {
+        node->left = GetPrimaryComparison (sent);                        // can't =
+
+        node->right = GetPrimaryBody (sent);                             // primary mb...
+    }
 
     return node;
 }
@@ -536,6 +550,9 @@ static constr CheckConstruction (const char* word)
 
     else if (!strcmp (word, "while"))
         return mwhile;
+
+    else if (!strcmp (word, "printf"))
+        return mprintf;
 
     return str;
 }

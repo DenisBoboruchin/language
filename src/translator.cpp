@@ -74,6 +74,12 @@ int WorkWithConstr (FILE* asmFile, item* node)
             break;
         }
 
+        case mprintf:
+        {
+            fprintf (asmFile, "\n\nPUSH [%d]\nOUT\n\n\n", node->left->data.STRID);
+            break;
+        }
+
         case mfor:
         case mwhile:
         case str:

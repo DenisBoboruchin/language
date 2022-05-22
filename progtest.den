@@ -1,9 +1,10 @@
 if (4 + 3)
 {
-    x = 1 + 2 * 3;
-
-	if (2 < 3)
-	{
-		y = x + 4;
-	};
+    x = 4;
+    y = x + 5;
+    printf x;
+    printf y;
+    y = y - x;
+    printf x;    
+    printf y;
 };$
