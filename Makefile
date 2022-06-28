@@ -1,8 +1,11 @@
 CC		= g++
 CFLAGS  = -c -Wall 
 
-all: main.o translator.o parser.o tree.o graphviz.o 
-	$(CC) src/translator.cpp src/tree.cpp src/parser.cpp src/graphviz.cpp main.cpp -o main 
+all: parser cpu
+
+
+parser: main.o translator.o parser.o tree.o graphviz.o 
+	$(CC) src/translator.cpp src/tree.cpp src/parser.cpp src/graphviz.cpp main.cpp -o pars
 
 main.o: main.cpp
 	$(CC) $(CFLAGS) main.cpp
@@ -18,8 +21,6 @@ tree.o: src/tree.cpp
 
 graphviz.o: src/graphviz.cpp
 	$(CC) $(CFLAGS) src/graphviz.cpp
-
-
 
 
 cpu: assembler.o disassembler.o proc.o stack.o sort.o start.o
@@ -44,9 +45,5 @@ sort.o: CPU/SortText.cpp
 	$(CC) $(CFLAGS) CPU/SortText.cpp
 
 
-
-
-
-
 clean:
-	rm -rf *.out *.o execute/a.asm execute/binCode.bin main start
+	rm -rf *.out *.o execute/a.asm execute/binCode.bin pars main start
