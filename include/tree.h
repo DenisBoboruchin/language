@@ -62,7 +62,8 @@ enum operate
     semicolon   =   ';',
     more        =   '>',
     smaller     =   '<',
-    equ         =   '='
+    equ         =   '=',
+    ordinary    =   '#'
 };
 
 enum constr

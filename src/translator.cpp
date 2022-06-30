@@ -97,13 +97,15 @@ int WorkWithConstr (FILE* asmFile, item* node)
 
 int PrintAsmOP (FILE* asmFile, item* node)
 {
-    if (node->left->type == STRID)
+    if (!node->left)
+        fprintf (asmFile, "PUSH 0\n");
+    else if (node->left->type == STRID)
         fprintf (asmFile, "PUSH [%d]\n", node->left->data.STRID);
     else if (node->left->type == INT)
         fprintf (asmFile, "PUSH %d\n", node->left->data.INT);
     else
         WorkWithOP (asmFile, node->left);
-
+        
     if (node->right->type == STRID)
         fprintf (asmFile, "PUSH [%d]\n", node->right->data.STRID);
     else if (node->right->type == INT)

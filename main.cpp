@@ -2,7 +2,7 @@
 
 #include "include/translator.h"
 
-const char* NAME = "progtest.den";
+const char* NAME = "prog.den";
 
 int main ()
 {

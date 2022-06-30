@@ -204,7 +204,7 @@ static item* GetEqual (sentence* sent)
         if (parsSymb == '=')
         {  
             PrintError (sent);
-            assert (!"SyntaxError, expected '='");
+            assert (!"SyntaxError, expected variable");
         }
         else
             return temp;                                    //
@@ -268,6 +268,7 @@ static item* GetComparison (sentence* sent)
             PrintError (sent);
             assert (!"SyntaxError, expected '='");
         }
+
         else
             return temp;
     }
@@ -281,6 +282,7 @@ static item* GetComparison (sentence* sent)
 
     item* node = new item;
     node->type = OP;
+
     if (op == '>')
         node->data.OP = more;
     else
@@ -378,7 +380,7 @@ static item* GetSign (sentence* sent)
             
             node->type = OP;
             node->data.OP = sub;
-            node->left = GetDegree (sent);
+            node->right = GetDegree (sent);
 
             return node;
         }
