@@ -66,7 +66,11 @@ int WorkWithConstr (FILE* asmFile, item* node)
     {
         case mif:
         {
-            WorkWithOP (asmFile, node->left);
+            if (node->left->type == OP)
+                WorkWithOP (asmFile, node->left);
+            else
+                fprintf (asmFile, "PUSH %d\n", node->left->data.INT);
+                    
             fprintf (asmFile, "PUSH 0\n");
             fprintf (asmFile, "JE DENIF%p\n\n", node);
             Translating (asmFile, node->right);
