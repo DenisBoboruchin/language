@@ -48,6 +48,7 @@ int WorkWithOP (FILE* asmFile, item* node)
 
         case more:
         case smaller:
+        case ordinary:
             PrintAsmComp (asmFile, node);
             break;
 
@@ -203,21 +204,37 @@ int PrintAsmComp (FILE* asmFile, item* node)
         WorkWithOP (asmFile, node->right);
 
     
-    fprintf (asmFile, "\nSUB\nPUSH 0\n\n");
-    fprintf (asmFile, "JB COMPARE%p\n", node);
+    fprintf (asmFile, "\nSUB\nPOP rdx\n");
+    
+    fprintf (asmFile, "PUSH rdx\nPUSH 0\n");
+    fprintf (asmFile, "JB COMPAREB%p\n", node);
+    
+    fprintf (asmFile, "PUSH rdx\n PUSH 0\n");
+    fprintf (asmFile, "JA COMPAREA%p\n", node);
 
-    if (node->data.OP == smaller)
-        fprintf (asmFile, "PUSH 0\n");
-    else if (node->data.OP == more)
+    if (node->data.OP == ordinary)
         fprintf (asmFile, "PUSH 1\n");
+    else
+        fprintf (asmFile, "PUSH 0\n");
+ 
+    fprintf (asmFile, "JMP JMPEXIT%p\n", node);
+
+////////////////////////////////////////////////////////////////      
+    fprintf (asmFile, "COMPAREA%p\n", node);
+
+    if (node->data.OP == more)
+        fprintf (asmFile, "PUSH 1\n");
+    else
+        fprintf (asmFile, "PUSH 0\n");
     
     fprintf (asmFile, "JMP JMPEXIT%p\n", node);
-    fprintf (asmFile, "COMPARE%p\n\n", node);
-
-
+    
+////////////////////////////////////////////////////////////////
+    fprintf (asmFile, "COMPAREB%p\n", node);
+    
     if (node->data.OP == smaller)
         fprintf (asmFile, "PUSH 1\n");
-    else if (node->data.OP == more)
+    else 
         fprintf (asmFile, "PUSH 0\n");
 
     fprintf (asmFile, "JMPEXIT%p\n\n", node);

@@ -266,7 +266,7 @@ static item* GetComparison (sentence* sent)
         if ((parsSymb == '>') || (parsSymb == '<'))
         {  
             PrintError (sent);
-            assert (!"SyntaxError, expected '='");
+            assert (!"SyntaxError!!!");
         }
 
         else
@@ -274,8 +274,18 @@ static item* GetComparison (sentence* sent)
     }
 
     int op = parsSymb;
-    if ((op != '>') && (op != '<'))
+    if ((op != '>') && (op != '<') && (op != '='))
         return temp;
+
+    if (op == '=')
+    {
+        sent->p++;
+        if (parsSymb != '=')
+        {
+            PrintError (sent);
+            assert (!"SyntaxError!!!");
+        }
+    }
 
     sent->p++;
     SkipTabs (sent);
@@ -285,8 +295,10 @@ static item* GetComparison (sentence* sent)
 
     if (op == '>')
         node->data.OP = more;
-    else
+    else if (op == '<')
         node->data.OP = smaller;
+    else
+        node->data.OP = ordinary;
 
     node->left = temp;
     node->right = GetExpression (sent);
