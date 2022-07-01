@@ -81,7 +81,12 @@ int WorkWithConstr (FILE* asmFile, item* node)
 
         case mprintf:
         {
-            fprintf (asmFile, "\n\nPUSH [%d]\nOUT\n\n\n", node->left->data.STRID);
+            if (node->left->type == STRID)
+                fprintf (asmFile, "\n\nPUSH [%d]\n", node->left->data.STRID);
+            else
+                WorkWithOP (asmFile, node->left);
+
+            fprintf (asmFile, "OUT\n\n");
             break;
         }
 

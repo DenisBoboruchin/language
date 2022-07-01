@@ -1,6 +1,7 @@
 #include "../include/parser.h"
 
 static item* GetStr                 (sentence* sent);
+static item* GetOutput              (sentence* sent);
 static item* GetIf                  (sentence* sent);
 static item* GetPrimaryBody         (sentence* sent);
 static item* GetEqual               (sentence* sent);
@@ -91,7 +92,7 @@ static item* GetStr (sentence* sent)
 {
     SkipTabs (sent);
 
-    item* nodeLeft = GetIf (sent);
+    item* nodeLeft = GetOutput (sent);
     item* node = nodeLeft;
 
     if (parsSymb != ';')
@@ -106,7 +107,7 @@ static item* GetStr (sentence* sent)
         sent->p++;  
         SkipTabs (sent);
 
-        item* nodeRight = GetIf (sent);
+        item* nodeRight = GetOutput (sent);
  
         if (nodeRight->type == ERR)
             return node;
@@ -130,6 +131,33 @@ static item* GetStr (sentence* sent)
     return node;
 }
 
+static item* GetOutput (sentence* sent)
+{
+    SkipTabs (sent);
+
+    int temp = sent->p;
+    SkipTabs (sent);
+
+    item* node = GetWord (sent);
+
+    if (node->data.CONSTR != mprintf)
+    {
+        sent->p = temp;
+        delete[] node;
+        return GetIf (sent);
+    }
+
+    node->left = GetComparison (sent);
+/*
+    if (node->left->type != STRID)
+    {
+        PrintError (sent);
+        assert (!"SyntaxError, expected 'variable'");
+    }
+*/
+    return node;
+}
+
 static item* GetIf (sentence* sent)     ///////////////////and printf!!!!!!
 {   
     SkipTabs (sent);
@@ -139,22 +167,11 @@ static item* GetIf (sentence* sent)     ///////////////////and printf!!!!!!
 
     item* node = GetWord (sent);
 
-    if ((node->data.CONSTR != mif) && (node->data.CONSTR != mprintf))
+    if (node->data.CONSTR != mif)
     {
         sent->p = temp;
         delete[] node;
         return GetEqual (sent);
-    }
-
-    if (node->data.CONSTR == mprintf)
-    {
-        node->left = GetWord (sent);
-
-        if (node->left->type != STRID)
-        {
-            PrintError (sent);
-            assert (!"SyntaxError, expected 'variable'");
-        }
     }
 
     else
@@ -162,9 +179,8 @@ static item* GetIf (sentence* sent)     ///////////////////and printf!!!!!!
         node->left = GetPrimaryComparison (sent);                        // can't =
 
         node->right = GetPrimaryBody (sent);                             // primary mb...
+        return node;
     }
-
-    return node;
 }
 
 static item* GetPrimaryBody (sentence* sent)
@@ -255,6 +271,7 @@ static item* GetPrimaryComparison (sentence* sent)
         assert (!"SyntaxError, expected '('");
     }
 }
+
 ///////////////////////////////////////////////////////////////////////////
 static item* GetComparison (sentence* sent)
 {
@@ -273,6 +290,7 @@ static item* GetComparison (sentence* sent)
             return temp;
     }
 
+///////////////////////////////////////////////////
     int op = parsSymb;
     if ((op != '>') && (op != '<') && (op != '='))
         return temp;
@@ -364,6 +382,8 @@ static item* GetTerm (sentence* sent)
      
         node->left = nodeLeft;
         node->right = nodeRight;
+
+        nodeLeft = node;
     }
 
     return node;
