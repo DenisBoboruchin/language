@@ -69,9 +69,14 @@ int WorkWithConstr (FILE* asmFile, item* node)
         {
             if (node->left->type == OP)
                 WorkWithOP (asmFile, node->left);
-            else
+            else if (node->left->type == INT)
                 fprintf (asmFile, "PUSH %d\n", node->left->data.INT);
-                    
+            else if (node->left->type == STRID)
+                fprintf (asmFile, "PUSH [%d]\n", node->left->data.STRID);        
+            else
+                assert (!"ERROR TRANSLAtiNG!!!");
+
+
             fprintf (asmFile, "PUSH 0\n");
             fprintf (asmFile, "JE DENIF%p\n\n", node);
             Translating (asmFile, node->right);

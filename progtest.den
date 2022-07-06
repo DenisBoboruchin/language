@@ -10,8 +10,8 @@ g = 1;
 output g;
 f = 1 < 2;
 output f;
-
-if (f + 1)
+output f;
+if (f == 4)
 {
     first = 4;
     y = first + 5;
