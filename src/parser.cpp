@@ -1,6 +1,7 @@
 #include "../include/parser.h"
 
 static item* GetStr                 (sentence* sent);
+static item* GetComment             (sentence* sent);
 static item* GetOutput              (sentence* sent);
 static item* GetIf                  (sentence* sent);
 static item* GetPrimaryBody         (sentence* sent);
@@ -69,9 +70,10 @@ item* GetGrammar (const char* name)
     char* str = CreateBuf (&sizeBuf, name);
 
 
-    sentence sent = {};
-    sent.str = str;
-    sent.p = 0;
+    sentence sent   = {};
+    sent.str        = str;
+    sent.p          = 0;
+    sent.size       = sizeBuf;
     
     sent.labelPoint = 0;
     sent.labelSize  = MAXWORDLEN;
@@ -80,10 +82,7 @@ item* GetGrammar (const char* name)
     item* node = GetStr (&sent);
     
     if (sent.str[sent.p] != '$')
-    {
-        PrintError (&sent);
         assert (!"SyntaxError, expected '$'");
-    }
 
     return node;
 }
@@ -92,7 +91,7 @@ static item* GetStr (sentence* sent)
 {
     SkipTabs (sent);
 
-    item* nodeLeft = GetOutput (sent);
+    item* nodeLeft = GetComment (sent);
     item* node = nodeLeft;
 
     if (parsSymb != ';')
@@ -107,7 +106,7 @@ static item* GetStr (sentence* sent)
         sent->p++;  
         SkipTabs (sent);
 
-        item* nodeRight = GetOutput (sent);
+        item* nodeRight = GetComment (sent);
  
         if (nodeRight->type == ERR)
             return node;
@@ -129,6 +128,54 @@ static item* GetStr (sentence* sent)
     }
 
     return node;
+}
+
+static item* GetComment (sentence* sent)
+{
+    SkipTabs (sent);
+
+    if (parsSymb == '#')
+    {
+        sent->p++;
+
+        if (parsSymb == '#')
+        {
+            sent->p++;
+
+            while ((parsSymb != '#') || (sent->str[sent->p + 1] != '#'))
+            {
+                if (sent->p > sent->size)
+                    break;
+
+                if (parsSymb == '\n')
+                {
+                    sent->line++;
+                    sent->pStart = sent->p + 1;
+                }
+                
+                sent->p++;
+            }
+
+            sent->p += 2;
+        }
+        
+        else
+        {
+            while (parsSymb != '\n')
+            {
+                if (sent->p > sent->size)
+                    break;
+                sent->line++;
+                sent->p++;
+            }
+        }
+
+        SkipTabs (sent);
+        return GetComment (sent);
+    }
+    
+    SkipTabs (sent);
+    return GetOutput (sent);
 }
 
 static item* GetOutput (sentence* sent)
@@ -158,7 +205,7 @@ static item* GetOutput (sentence* sent)
     return node;
 }
 
-static item* GetIf (sentence* sent)     ///////////////////and printf!!!!!!
+static item* GetIf (sentence* sent)     
 {   
     SkipTabs (sent);
 
@@ -612,6 +659,8 @@ static int  SkipTabs (sentence* sent)
 {
     while ((parsSymb == '\n') || (parsSymb == '\t') || (parsSymb == ' ') || (parsSymb == '\r'))
     {
+        if (sent->p > sent->size)
+            break;
         if (parsSymb == '\n')
         {
            sent->line++;

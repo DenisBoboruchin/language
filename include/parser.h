@@ -17,6 +17,7 @@ struct sentence
     int         p           =       0;
     int         pStart      =       0; 
     int         line        =       1;
+    int         size        =       0;
 
     int         labelPoint  =       0;
     int         labelSize   =       0;

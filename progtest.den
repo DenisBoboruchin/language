@@ -7,15 +7,18 @@ f = f - 1;
 g;
 g = 2;
 g = 1;
-output g;
+
+output g;        
 f = 1 < 2;
-output f;
-output f;
-if (f == 4)
+
+#output f;
+#output f; 
+
+if (f)                          
 {
-    first = 4;
+    first = 4;                  #new var
     y = first + 5;
-    output first;
+    output first;               
     output y;
     y = y - first * first;
     output first;
@@ -25,3 +28,4 @@ if (f == 4)
         output y;
     };
 };$
+
