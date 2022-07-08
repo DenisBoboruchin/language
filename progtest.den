@@ -14,7 +14,7 @@ f = 1 < 2;
 #output f;
 #output f; 
 
-if (f)                          
+if (f)                          #if 
 {
     first = 4;                  #new var
     y = first + 5;

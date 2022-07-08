@@ -119,11 +119,9 @@ static item* GetStr (sentence* sent)
 
         node = new item;
         node->type = OP;
-
         node->data.OP = semicolon;
 
         node->left = nodeLeft;
-
         node->right = nodeRight;
     }
 
@@ -243,13 +241,15 @@ static item* GetPrimaryBody (sentence* sent)
     SkipTabs (sent);
 
     item* node = GetStr (sent);
-
+    
     if (parsSymb != '}')
     {
         PrintError (sent);
         assert (!"SyntaxError, expected '}'");
     }
     sent->p++;
+
+    GetComment (sent);
     SkipTabs (sent);
 
     return node;
@@ -307,6 +307,8 @@ static item* GetPrimaryComparison (sentence* sent)
         }
 
         sent->p++;
+
+        GetComment (sent);
         SkipTabs (sent);
 
         return node;
@@ -512,6 +514,7 @@ static item* GetPrimaryExpression (sentence* sent)
         }
 
         sent->p++;
+        GetComparison (sent);
         SkipTabs (sent);
 
         return node;
