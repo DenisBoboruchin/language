@@ -95,7 +95,20 @@ int WorkWithConstr (FILE* asmFile, item* node)
             break;
         }
 
+        case mscanf:
+        {
+            if (node->left->type == STRID)
+                fprintf (asmFile, "IN\nPOP [%d]\n\n", node->left->data.STRID);
+
+            break;
+        }
+
         case mfor:
+        {
+            PrintAsmFor (asmFile, node);
+            break;
+        }
+
         case mwhile:
         case str:
 
@@ -167,38 +180,7 @@ int PrintAsmEqu (FILE* asmFile, item* node)
 }
 
 int PrintAsmComp (FILE* asmFile, item* node)
-{
-    /*
-    fprintf (asmFile, "PUSH 1\n");
-    
-    if (node->left->type == STRID)
-        fprintf (asmFile, "PUSH [%d]\n", node->left->data.STRID);
-    else if (node->left->type == INT)
-        fprintf (asmFile, "PUSH %d\n", node->left->data.INT);
-    else
-        WorkWithOP (asmFile, node->left);
-
-    if (node->right->type == STRID)
-        fprintf (asmFile, "PUSH [%d]\n", node->right->data.STRID);
-    else if (node->right->type == INT)
-        fprintf (asmFile, "PUSH %d\n", node->right->data.INT);
-    else
-        WorkWithOP (asmFile, node->right);
-
-    fprintf (asmFile, "\nSUB\n\nPUSH 0\n");
-    fprintf (asmFile, "JB COMPARE%p\n", node);
-
-    if (node->data.OP == more)
-        fprintf (asmFile, "POP rdx\nPUSH 0\n");
-
-    fprintf (asmFile, "COMPARE%p\n", node);
-
-    if (node->data.OP == smaller)
-        fprintf (asmFile, "POP rdx\nPUSH 0\n\n");
- 
-    return 0;
-    */
-  
+{  
     if (node->left->type == STRID)
         fprintf (asmFile, "PUSH [%d]\n", node->left->data.STRID);
     else if (node->left->type == INT)
@@ -229,7 +211,7 @@ int PrintAsmComp (FILE* asmFile, item* node)
  
     fprintf (asmFile, "JMP JMPEXIT%p\n", node);
 
-////////////////////////////////////////////////////////////////      
+    ////////////////////////////////////////////////////////////      
     fprintf (asmFile, "COMPAREA%p\n", node);
 
     if (node->data.OP == more)
@@ -239,7 +221,7 @@ int PrintAsmComp (FILE* asmFile, item* node)
     
     fprintf (asmFile, "JMP JMPEXIT%p\n", node);
     
-////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////
     fprintf (asmFile, "COMPAREB%p\n", node);
     
     if (node->data.OP == smaller)
@@ -249,6 +231,11 @@ int PrintAsmComp (FILE* asmFile, item* node)
 
     fprintf (asmFile, "JMPEXIT%p\n\n", node);
 
+    return 0;
+}
+
+int PrintAsmFor (FILE* asmFile, item* node)
+{
     return 0;
 }
 

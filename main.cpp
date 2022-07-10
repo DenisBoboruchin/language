@@ -17,7 +17,7 @@ int main ()
 
     t2.graphDump ();
 
-    TranslateToAsm (t3);
+    //TranslateToAsm (t3);
 
     return 0;
 }

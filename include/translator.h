@@ -16,4 +16,6 @@ int         WorkWithConstr  (FILE* asmFile, item* node);
 int         PrintAsmOP      (FILE* asmFile, item* node);
 int         PrintAsmEqu     (FILE* asmFile, item* node);
 int         PrintAsmComp    (FILE* asmFile, item* node);
+int         PrintAsmFor     (FILE* asmFile, item* node);
+
 #endif

@@ -3,7 +3,10 @@
 static item* GetStr                 (sentence* sent);
 static item* GetComment             (sentence* sent);
 static item* GetOutput              (sentence* sent);
+static item* GetInput               (sentence* sent);
 static item* GetIf                  (sentence* sent);
+static item* GetFor                 (sentence* sent);
+static item* GetPrimaryFor          (sentence* sent);
 static item* GetPrimaryBody         (sentence* sent);
 static item* GetEqual               (sentence* sent);
 static item* GetPrimaryComparison   (sentence* sent);
@@ -189,7 +192,7 @@ static item* GetOutput (sentence* sent)
     {
         sent->p = temp;
         delete[] node;
-        return GetIf (sent);
+        return GetInput (sent);
     }
 
     node->left = GetComparison (sent);
@@ -202,6 +205,36 @@ static item* GetOutput (sentence* sent)
 */
     return node;
 }
+
+static item* GetInput (sentence* sent)
+{
+    SkipTabs (sent);
+
+    int temp = sent->p;
+    SkipTabs (sent);
+
+    item* node = GetWord (sent);
+
+    if (node->data.CONSTR != mscanf)
+    {
+        sent->p = temp;
+        delete[] node;
+        return GetIf (sent);
+    }
+
+    node->left = GetWord (sent);
+
+    if (node->left->type != STRID)
+    {
+        PrintError (sent);
+        assert (!"SyntaxError, expected 'variable'");
+    }
+
+    return node;
+}
+
+/////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////
 
 static item* GetIf (sentence* sent)     
 {   
@@ -216,7 +249,7 @@ static item* GetIf (sentence* sent)
     {
         sent->p = temp;
         delete[] node;
-        return GetEqual (sent);
+        return GetFor (sent);
     }
 
     else
@@ -226,6 +259,119 @@ static item* GetIf (sentence* sent)
         node->right = GetPrimaryBody (sent);                             // primary mb...
         return node;
     }
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+static item* GetFor (sentence* sent)
+{
+    SkipTabs (sent);
+
+    int temp = sent->p;
+
+    item* node = GetWord (sent);
+
+    if (node->data.CONSTR != mfor)
+    {
+        sent->p = temp;
+        delete[] node;
+        return GetEqual (sent);
+    }
+
+    else
+    {
+        node->left = GetPrimaryFor (sent);                       
+
+        node->right = GetPrimaryBody (sent);              
+        return node;
+    }
+}
+
+static item* GetPrimaryFor (sentence* sent)
+{
+    SkipTabs (sent);
+
+    if (parsSymb != '(')
+    {
+        PrintError (sent);
+        assert (!"SyntaxError, expected '('");
+    }
+    sent->p++;
+    SkipTabs (sent);
+    
+    int temp = sent->p;
+    
+    //
+    item* nodeLeft = GetWord (sent);
+    if (nodeLeft->type != STRID)
+    {
+        sent->p = temp;
+        delete[] nodeLeft;
+        nodeLeft = GetExpression (sent);
+    }
+    SkipTabs (sent);
+
+    if (parsSymb != ';')
+    {
+        PrintError (sent);
+        assert (!"SyntaxError, Expected ';'");
+    }
+    sent->p++;
+    SkipTabs (sent);
+    
+    //////////////////////////////////////////
+    item* nodeRight = GetWord (sent);
+    if (nodeRight->type != STRID)
+    {
+        sent->p = temp;
+        delete[] nodeRight;
+        nodeRight = GetExpression (sent);
+    }
+    SkipTabs (sent);
+
+    if (parsSymb != ';')
+    {
+        PrintError (sent);
+        assert (!"SyntaxError, Expected ';'");
+    }
+    sent->p++;
+    SkipTabs (sent);
+
+    ///////////////////////////////////////////
+    item* nodeSemicolon1 = new item;
+    nodeSemicolon1->type = OP;
+    nodeSemicolon1->data.OP = semicolon;
+
+    nodeSemicolon1->left = nodeLeft;
+    nodeSemicolon1->right = nodeRight;
+    ///////////////////////////////////////////
+    
+    item* nodeStep = GetWord (sent);
+    if (nodeStep->type != STRID)
+    {
+        sent->p = temp;
+        delete[] nodeStep;
+        nodeStep = GetExpression (sent);
+    }
+    SkipTabs (sent);
+
+    if (parsSymb != ')')
+    {
+        PrintError (sent);
+        assert (!"SyntaxError, Expected ')'");
+    }
+    sent->p++;
+    SkipTabs (sent);
+
+    ///////////////////////////////////////////
+    item* nodeSemicolon2 = new item;
+    nodeSemicolon2->type = OP;
+    nodeSemicolon2->data.OP = semicolon;
+
+    nodeSemicolon2->left = nodeSemicolon1;
+    nodeSemicolon2->right = nodeStep;
+
+    return nodeSemicolon2;
 }
 
 static item* GetPrimaryBody (sentence* sent)
@@ -637,6 +783,9 @@ static constr CheckConstruction (const char* word)
 
     else if (!strcmp (word, "output"))
         return mprintf;
+    
+    else if (!strcmp (word, "input"))
+        return mscanf;
 
     return str;
 }

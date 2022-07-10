@@ -1,3 +1,4 @@
+##
 f = 4;
 
 f = f - 3;
@@ -11,6 +12,11 @@ g = 1;
 output g;        
 f = 1 < 2;
 
+
+input f;
+output r;
+
+
 #output f;
 #output f; 
 
@@ -20,12 +26,24 @@ if (f)                          #if
     y = first + 5;
     output first;               
     output y;
+
     y = y - first * first;
     output first;
     
     if (first < 9)
-    {    
+    {   
         output y;
     };
-};$
+};
+##
+
+x = 1;
+y = 3;
+
+for (x; y; 2)
+{
+    x + y;
+};
+
+$
 
