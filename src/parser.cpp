@@ -298,16 +298,13 @@ static item* GetPrimaryFor (sentence* sent)
     }
     sent->p++;
     SkipTabs (sent);
-    
-    int temp = sent->p;
-    
+     
     //
     item* nodeLeft = GetWord (sent);
     if (nodeLeft->type != STRID)
     {
-        sent->p = temp;
-        delete[] nodeLeft;
-        nodeLeft = GetExpression (sent);
+        PrintError (sent);
+        assert (!"SyntaxError, expected variable");
     }
     SkipTabs (sent);
 
@@ -320,13 +317,7 @@ static item* GetPrimaryFor (sentence* sent)
     SkipTabs (sent);
     
     //////////////////////////////////////////
-    item* nodeRight = GetWord (sent);
-    if (nodeRight->type != STRID)
-    {
-        sent->p = temp;
-        delete[] nodeRight;
-        nodeRight = GetExpression (sent);
-    }
+    item* nodeRight = GetExpression (sent);
     SkipTabs (sent);
 
     if (parsSymb != ';')
@@ -346,13 +337,7 @@ static item* GetPrimaryFor (sentence* sent)
     nodeSemicolon1->right = nodeRight;
     ///////////////////////////////////////////
     
-    item* nodeStep = GetWord (sent);
-    if (nodeStep->type != STRID)
-    {
-        sent->p = temp;
-        delete[] nodeStep;
-        nodeStep = GetExpression (sent);
-    }
+    item* nodeStep = GetExpression (sent);
     SkipTabs (sent);
 
     if (parsSymb != ')')

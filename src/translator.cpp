@@ -22,6 +22,12 @@ int Translating (FILE* asmFile, item* node)
     else if (node->type == CONSTR)
         WorkWithConstr (asmFile, node);
 
+    else if (node->type == INT)
+        fprintf (asmFile, "PUSH %d\n", node->data.INT);
+
+    else if (node->type == STRID)
+        fprintf (asmFile, "PUSH [%d]\n", node->data.STRID);
+
     return 0;
 }
 
@@ -236,6 +242,30 @@ int PrintAsmComp (FILE* asmFile, item* node)
 
 int PrintAsmFor (FILE* asmFile, item* node)
 {
+    fprintf (asmFile, "PUSH [%d]\n", node->left->left->left->data.STRID);   //a
+    Translating (asmFile, node->left->left->right);                         //b
+
+    fprintf (asmFile, "JA END%p\n\n", node);
+    fprintf (asmFile, "MAIN%p\n", node);
+
+    Translating (asmFile, node->right);             //programm
+
+    ///изменили значение индекса
+    fprintf (asmFile, "PUSH [%d]\n", node->left->left->left->data.STRID);
+    Translating (asmFile, node->left->right);
+    fprintf (asmFile, "ADD\n");
+    
+    fprintf (asmFile, "POP  [%d]\n", node->left->left->left->data.STRID);
+    fprintf (asmFile, "PUSH [%d]\n", node->left->left->left->data.STRID);
+    ///
+    
+    Translating (asmFile, node->left->left->right);
+    
+    fprintf (asmFile, "JA END%p\n\n", node);
+    fprintf (asmFile, "JMP MAIN%p\n", node);
+    
+    fprintf (asmFile, "END%p\n", node);
+
     return 0;
 }
 
