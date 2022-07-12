@@ -36,15 +36,22 @@ if (f)                          #if
     };
 };
 ##
-
+##
 x = 1;
 y = 5;
 
-for (x; y; 2)
+for (x; 10; 1)
 {
-    z = x + y;
-    output z;
+    output x;
 };
+##
 
+x = 1;
+y = 10;
+while (x < y)
+{
+    output x;
+    x = x + 1;
+};
 $
 

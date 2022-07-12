@@ -6,6 +6,7 @@ static item* GetOutput              (sentence* sent);
 static item* GetInput               (sentence* sent);
 static item* GetIf                  (sentence* sent);
 static item* GetFor                 (sentence* sent);
+static item* GetWhile               (sentence* sent);
 static item* GetPrimaryFor          (sentence* sent);
 static item* GetPrimaryBody         (sentence* sent);
 static item* GetEqual               (sentence* sent);
@@ -275,7 +276,7 @@ static item* GetFor (sentence* sent)
     {
         sent->p = temp;
         delete[] node;
-        return GetEqual (sent);
+        return GetWhile (sent);
     }
 
     else
@@ -357,6 +358,30 @@ static item* GetPrimaryFor (sentence* sent)
     nodeSemicolon2->right = nodeStep;
 
     return nodeSemicolon2;
+}
+
+static item* GetWhile (sentence* sent)
+{
+    SkipTabs (sent);
+
+    int temp = sent->p;
+
+    item* node = GetWord (sent);
+
+    if (node->data.CONSTR != mwhile)
+    {
+        sent->p = temp;
+        delete[] node;
+        return GetEqual (sent);
+    }
+
+    else
+    {
+        node->left = GetPrimaryComparison (sent);                       
+
+        node->right = GetPrimaryBody (sent);              
+        return node;
+    }
 }
 
 static item* GetPrimaryBody (sentence* sent)

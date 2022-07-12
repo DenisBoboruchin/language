@@ -87,6 +87,7 @@ int WorkWithConstr (FILE* asmFile, item* node)
             fprintf (asmFile, "JE DENIF%p\n\n", node);
             Translating (asmFile, node->right);
             fprintf (asmFile, "\nDENIF%p\n\n", node);
+            PrintAsmIf (asmFile, node);
             break;
         }
 
@@ -116,6 +117,11 @@ int WorkWithConstr (FILE* asmFile, item* node)
         }
 
         case mwhile:
+        {
+            PrintAsmWhile (asmFile, node);
+            break;    
+        }
+
         case str:
 
         default:
@@ -185,7 +191,7 @@ int PrintAsmEqu (FILE* asmFile, item* node)
     return 0;
 }
 
-int PrintAsmComp (FILE* asmFile, item* node)
+int PrintAsmComp (FILE* asmFile, item* node, int prefix)
 {  
     if (node->left->type == STRID)
         fprintf (asmFile, "PUSH [%d]\n", node->left->data.STRID);
@@ -205,37 +211,57 @@ int PrintAsmComp (FILE* asmFile, item* node)
     fprintf (asmFile, "\nSUB\nPOP rdx\n");
     
     fprintf (asmFile, "PUSH rdx\nPUSH 0\n");
-    fprintf (asmFile, "JB COMPAREB%p\n", node);
+    fprintf (asmFile, "JB %dCOMPAREB%p\n", prefix, node);
     
     fprintf (asmFile, "PUSH rdx\n PUSH 0\n");
-    fprintf (asmFile, "JA COMPAREA%p\n", node);
+    fprintf (asmFile, "JA %dCOMPAREA%p\n", prefix, node);
 
     if (node->data.OP == ordinary)
         fprintf (asmFile, "PUSH 1\n");
     else
         fprintf (asmFile, "PUSH 0\n");
  
-    fprintf (asmFile, "JMP JMPEXIT%p\n", node);
+    fprintf (asmFile, "JMP %dJMPEXIT%p\n", prefix, node);
 
     ////////////////////////////////////////////////////////////      
-    fprintf (asmFile, "COMPAREA%p\n", node);
+    fprintf (asmFile, "%dCOMPAREA%p\n", prefix, node);
 
     if (node->data.OP == more)
         fprintf (asmFile, "PUSH 1\n");
     else
         fprintf (asmFile, "PUSH 0\n");
     
-    fprintf (asmFile, "JMP JMPEXIT%p\n", node);
+    fprintf (asmFile, "JMP %dJMPEXIT%p\n", prefix, node);
     
     ////////////////////////////////////////////////////////////
-    fprintf (asmFile, "COMPAREB%p\n", node);
+    fprintf (asmFile, "%dCOMPAREB%p\n", prefix, node);
     
     if (node->data.OP == smaller)
         fprintf (asmFile, "PUSH 1\n");
     else 
         fprintf (asmFile, "PUSH 0\n");
 
-    fprintf (asmFile, "JMPEXIT%p\n\n", node);
+    fprintf (asmFile, "%dJMPEXIT%p\n\n", prefix, node);
+
+    return 0;
+}
+
+int PrintAsmIf (FILE* asmFile, item* node)
+{
+    if (node->left->type == OP)
+        WorkWithOP (asmFile, node->left);
+    else if (node->left->type == INT)
+        fprintf (asmFile, "PUSH %d\n", node->left->data.INT);
+    else if (node->left->type == STRID)
+        fprintf (asmFile, "PUSH [%d]\n", node->left->data.STRID);        
+    else
+        assert (!"ERROR TRANSLAtiNG!!!");
+
+
+    fprintf (asmFile, "PUSH 0\n");
+    fprintf (asmFile, "JE DENIF%p\n\n", node);
+    Translating (asmFile, node->right);
+    fprintf (asmFile, "\nDENIF%p\n\n", node);
 
     return 0;
 }
@@ -265,6 +291,23 @@ int PrintAsmFor (FILE* asmFile, item* node)
     fprintf (asmFile, "JMP MAIN%p\n", node);
     
     fprintf (asmFile, "END%p\n", node);
+
+    return 0;
+}
+
+int PrintAsmWhile (FILE* asmFile, item* node)
+{
+    PrintAsmComp (asmFile, node->left);
+    fprintf (asmFile, "PUSH 0\nJE END%p\n", node);
+    
+    fprintf (asmFile, "MAIN%p\n", node);
+    Translating (asmFile, node->right);    
+
+    PrintAsmComp (asmFile, node->left, 2);
+    fprintf (asmFile, "PUSH 0\nJE END%p\n", node);
+    
+    fprintf (asmFile, "JMP MAIN%p\n", node);
+    fprintf (asmFile, "END%p\n\n", node);
 
     return 0;
 }
